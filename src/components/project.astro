@@ -1,0 +1,28 @@
+---
+interface Props {
+	url?: string
+	link?: string
+	title?: string
+}
+
+const { url, link, title } = Astro.props
+---
+
+<div class="mt-4 pl-4">
+	{
+		link && (
+			<a
+				href={url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mb-1 font-bold tracking-wide hover:underline"
+			>
+				{link}
+			</a>
+		)
+	}
+	{title && <p class="mb-1 font-bold tracking-wide">Winning Tipsters</p>}
+	<p>
+		<slot />
+	</p>
+</div>
