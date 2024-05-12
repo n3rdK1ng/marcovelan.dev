@@ -1,0 +1,15 @@
+---
+interface Props {
+	lang: string
+	flag: string
+	level: string
+}
+
+const { lang, flag, level } = Astro.props
+---
+
+<h3>
+	<b>{lang}</b>
+	{flag}
+	<p class="pl-4">{level}</p>
+</h3>

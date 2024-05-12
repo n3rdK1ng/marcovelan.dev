@@ -1,0 +1,13 @@
+---
+interface Props {
+	year: number
+}
+
+const { year } = Astro.props
+---
+
+<p>
+	{year}
+	<em>–</em>
+	<slot />
+</p>

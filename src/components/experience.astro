@@ -1,0 +1,35 @@
+---
+interface Props {
+	position: string
+	url?: string
+	link?: string
+	company: string
+	location: string
+	start: number
+	end?: number
+}
+
+const { position, url, link, company, location, start, end } = Astro.props
+---
+
+<h3 class="mb-2 mt-8 text-2xl font-medium">{position}</h3>
+{
+	link && (
+		<a
+			href={url}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="font-bold tracking-wide hover:underline"
+		>
+			{link}
+		</a>
+	)
+}
+<p class="my-2 italic text-zinc-500">
+	<b>{company}</b>, {location} – ({
+		start === end ? start : `${start} - ${end ?? 'present'}`
+	})
+</p>
+<p>
+	<slot />
+</p>
