@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+
 interface Props {
 	position: string
 	url?: string
@@ -10,6 +12,9 @@ interface Props {
 }
 
 const { position, url, link, company, location, start, end } = Astro.props
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
 <h3 class="mb-2 mt-8 text-2xl font-medium">{position}</h3>
@@ -27,7 +32,7 @@ const { position, url, link, company, location, start, end } = Astro.props
 }
 <p class="my-2 italic text-zinc-500">
 	<b>{company}</b>, {location} – ({
-		start === end ? start : `${start} - ${end ?? 'present'}`
+		start === end ? start : `${start} - ${end ?? t('present')}`
 	})
 </p>
 <p>

@@ -1,0 +1,137 @@
+---
+import Achievement from './achievement.astro'
+import Experience from './experience.astro'
+import Header from './header.astro'
+import Heading from './heading.astro'
+import Lang from './lang.astro'
+import Project from './project.astro'
+import Separator from './separator.astro'
+import Layout from '../layouts/Layout.astro'
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<Layout
+	title={'Marco Velan: ' + t('resume')}
+	description={'Marco Velan: ' + t('resume')}
+>
+	<Header />
+
+	<section class="container bg-zinc-900 py-6 text-zinc-200 lg:px-32">
+		<p class="border-l-2 border-l-white pl-4">
+			{t('hero1')}
+			<br />
+			<br />
+			{t('hero2')}
+		</p>
+		<Heading>📞 {t('contactInfo')}</Heading>
+		<p>
+			📧 &nbsp; <a class="hover:underline" href="mailto:marco.velan10@gmail.com"
+				>marco.velan10@gmail.com</a
+			>
+		</p>
+		<p>
+			🔗 &nbsp; <a
+				class="hover:underline"
+				target="_blank"
+				rel="noopener noreferrer"
+				href="https://www.linkedin.com/in/marcovelan/">LinkedIn</a
+			>
+		</p>
+		<p>
+			📆 &nbsp; <button
+				class="hover:underline"
+				data-cal-link="marcovelan/job-offer"
+				data-cal-namespace=""
+				data-cal-config='{"layout":"month_view"}'
+			>
+				{t('openCalendar')}
+			</button>
+		</p>
+		<Separator />
+		<Heading>💻 {t('experience')}</Heading>
+		<Experience
+			position="Full-stack Developer"
+			url="https://blaze.codes/"
+			link="blaze.codes"
+			company="Blaze Company"
+			location={'Ostrava, ' + t('czechRepublic')}
+			start={2023}
+		>
+			{t('blazeExperience')}
+		</Experience>
+
+		<Project url="https://www.xalarm.cz/" link="xalarm.cz">
+			(React, React Native, TS, Expo, Next.js, tRPC, Prisma, Stripe, RevenueCat,
+			tailwindcss, shadcn/ui, zod)
+		</Project>
+		<Project url="https://spudnow.co.uk/" link="spudnow.co.uk">
+			(React Native, TS, Expo, Redux Toolkit, NativeBase, yup)
+		</Project>
+		<Project url="https://izzy.cz/" link="izzy.cz">
+			(React, Vue, TS, Remix, NestJS, MongoDB, TanStack Query, Stripe,
+			tailwindcss, shadcn/ui, zod, Vite)
+		</Project>
+		<Project title="Winning Tipsters">
+			(React, TS, Remix, NestJS, Prisma, clerk, tailwindcss, shadcn/ui, zod,
+			Vite)
+		</Project>
+
+		<Experience
+			position="Frontend Developer"
+			url="https://www.royal-fox.cz/"
+			link="royal-fox.cz"
+			company="Royal Fox"
+			location={'Ostrava, ' + t('czechRepublic')}
+			start={2023}
+			end={2023}
+		>
+			{t('royalFoxExperience')}
+		</Experience>
+
+		<Project url="https://www.forclassmates.com/" link="forclassmates.com">
+			(Vue, Nuxt, TS, Tiptap, Pinia, KaTeX, MathLive, Bootstrap, Sass, Element
+			Plus, Vite)
+		</Project>
+
+		<Experience
+			position="Freelance"
+			company={t('selfEmployed')}
+			location={'Ostrava, ' + t('czechRepublic')}
+			start={2022}
+		>
+			{t('freelanceExperience')}
+		</Experience>
+
+		<Separator />
+
+		<Heading>✨ {t('languages')}</Heading>
+		<Lang lang={t('czech')} flag="🇨🇿" level={t('native')} />
+		<Lang lang={t('english')} flag="🇺🇸" level={t('comfort')} />
+		<Lang lang={t('croatian')} flag="🇭🇷" level={t('commuticable')} />
+		<Lang lang={t('spanish')} flag="🇪🇸" level={t('basic')} />
+
+		<Separator />
+
+		<Heading>🤠 {t('hobbies')}</Heading>
+		<p>{t('hobby1')}</p>
+		<p>{t('hobby2')}</p>
+		<p>{t('hobby3')}</p>
+		<p>{t('hobby4')}</p>
+
+		<Separator />
+
+		<Heading>🏆 {t('achievemets')}</Heading>
+		<Achievement year={2019}>
+			{t('achievement1')}
+		</Achievement>
+		<Achievement year={2021}>
+			{t('achievement2')}
+		</Achievement>
+		<Achievement year={2024}>
+			{t('achievement3')}
+		</Achievement>
+	</section>
+</Layout>
