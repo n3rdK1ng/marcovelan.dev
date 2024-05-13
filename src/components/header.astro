@@ -1,21 +1,20 @@
 ---
 import GitLink from './git-link.astro'
+import LanguagePicker from './language-picker.astro'
 ---
 
-<header
-	class="container flex items-center justify-between gap-4 bg-zinc-900 pb-6 pt-16 lg:px-32 lg:pt-36"
->
-	<h1 class="text-5xl font-bold lg:text-7xl lg:font-extrabold">
-		<div
-			class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-		>
-			Resume
+<header class="container bg-zinc-900 py-6 lg:px-32">
+	<div class="flex flex-col justify-between gap-16 lg:gap-32">
+		<LanguagePicker />
+		<div class="flex items-center justify-between gap-4">
+			<h1 class="text-5xl font-bold lg:text-7xl lg:font-extrabold">
+				<div
+					class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+				>
+					Marco Velan
+				</div>
+			</h1>
+			<GitLink />
 		</div>
-		<div
-			class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-		>
-			Marco Velan
-		</div>
-	</h1>
-	<GitLink />
+	</div>
 </header>

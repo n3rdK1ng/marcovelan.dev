@@ -1,0 +1,21 @@
+---
+import { languages } from '../i18n/ui'
+import { getLangFromUrl, useTranslatedPath } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const translatePath = useTranslatedPath(lang)
+---
+
+<div class="flex flex-row-reverse justify-start gap-2 text-white text-xl">
+	{
+		Object.entries(languages).map(([lang, label]) => (
+			<p
+				class:list={
+					lang === getLangFromUrl(Astro.url) ? 'underline' : 'hover:underline'
+				}
+			>
+				<a href={translatePath('/', lang)}>{label}</a>
+			</p>
+		))
+	}
+</div>
