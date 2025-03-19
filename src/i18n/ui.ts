@@ -12,7 +12,7 @@ export const ui = {
 		hero1:
 			'I am a software developer with a passion for creating user-friendly interfaces.',
 		hero2:
-			'My current focus is on web and mobile front-end development, where I prefer to work with React and TypeScript.',
+			'My current focus is on web and mobile development, where I prefer to work with React and TypeScript.',
 		contactInfo: 'Contact Information',
 		openCalendar: 'Open Calendar',
 		experience: 'Experience',
@@ -44,6 +44,12 @@ export const ui = {
 			'Allowed by the Czech court to do adult stuff before the age of 18.',
 		achievement3: 'I have lifted 300kg several times on my own.',
 		present: 'present',
+		scrumWorksExperience:
+			'Frontend developer who worked on a large-scale community platform migration. Contributed to the transformation of a legacy system with over 20 years of history into a modern web application, serving millions of active users worldwide with both free and premium content.',
+		gomobilExperience:
+			'Leading the development of a comprehensive self-service platform for a telecommunications provider. Working on both web and mobile application, migrating a legacy system with around 50,000 active users to a modern, maintainable architecture using cutting-edge technologies.',
+		goenergyExperience:
+			'Consulting on mobile application development and continuous delivery automation. Providing expertise in modern mobile development practices and helping to streamline the deployment process for a more efficient development workflow.',
 	},
 	cs: {
 		resume: 'Životopis',
@@ -51,7 +57,7 @@ export const ui = {
 		hero1:
 			'Jsem softwarový vývojář s nadšením pro vytváření uživatelsky přívětivých prostředí.',
 		hero2:
-			'V současné době se zaměřuji na front-end vývoj webových a mobilních aplikací, kde nejraději využívám React a TypeScript.',
+			'V současné době se zaměřuji na vývoj webových a mobilních aplikací, kde nejraději využívám React a TypeScript.',
 		contactInfo: 'Kontaktní informace',
 		openCalendar: 'Otevřít kalendář',
 		experience: 'Zkušenosti',
@@ -82,6 +88,12 @@ export const ui = {
 		achievement2: 'Byl jsem českým soudem emancipován před dosažením 18 let.',
 		achievement3: 'Opakovaně jsem vlastní silou zvedl 300 kg.',
 		present: 'současnost',
+		scrumWorksExperience:
+			'Frontend vývojář, který pracoval na migraci rozsáhlé komunitní platformy. Podílel se na transformaci legacy systému s více než 20 letou historií na moderní webovou aplikaci, která slouží milionům aktivních uživatelů po celém světě s bezplatným i prémiovým obsahem.',
+		gomobilExperience:
+			'Vedoucí vývoje komplexní samoobslužné platformy pro telekomunikačního operátora. Pracuji na webové i mobilní aplikaci, migruji legacy systém s přibližně 50 000 aktivními uživateli na moderní, udržovatelnou architekturu využívající nejnovější technologie.',
+		goenergyExperience:
+			'Konzultace v oblasti vývoje mobilních aplikací a automatizace kontinuálního nasazování. Poskytování odborných znalostí v moderních postupech mobilního vývoje a pomoc při optimalizaci procesu nasazování pro efektivnější vývojový workflow.',
 	},
 } as const
 

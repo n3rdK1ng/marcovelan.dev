@@ -21,7 +21,7 @@ const { url, link, title } = Astro.props
 			</a>
 		)
 	}
-	{title && <p class="mb-1 font-bold tracking-wide">Winning Tipsters</p>}
+	{title && <p class="mb-1 font-bold tracking-wide">{title}</p>}
 	<p>
 		<slot />
 	</p>

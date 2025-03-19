@@ -6,7 +6,7 @@ const lang = getLangFromUrl(Astro.url)
 const translatePath = useTranslatedPath(lang)
 ---
 
-<div class="flex flex-row-reverse justify-start gap-2 text-white text-xl">
+<div class="flex flex-row-reverse justify-start gap-2 text-xl text-white">
 	{
 		Object.entries(languages).map(([lang, label]) => (
 			<p
