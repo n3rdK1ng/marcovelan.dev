@@ -53,30 +53,74 @@ const t = useTranslations(lang)
 		<Separator />
 		<Heading>💻 {t('experience')}</Heading>
 		<Experience
+			position="Frontend Lead"
+			company="GoMobil"
+			location={t('czechRepublic')}
+			start={2024}
+		>
+			{t('gomobilExperience')}
+		</Experience>
+
+		<Project link="gomobil.cz" url="https://www.gomobil.cz/">
+			(React, React Native, Expo, TS, tailwindcss, NativeWind, rnr,
+			rn-primitives, TanStack Start, TanStack Router, TanStack Query, TanStack
+			Form, zod, EAS, Docker)
+		</Project>
+
+		<Experience
+			position="IT Consultant"
+			company="GoEnergy"
+			location={t('czechRepublic')}
+			start={2024}
+		>
+			{t('goenergyExperience')}
+		</Experience>
+
+		<Project link="goenergy.cz" url="https://www.goenergy.cz/">
+			(React Native, Expo, TS, gluestack-ui, EAS)
+		</Project>
+
+		<Experience
+			position="Frontend Developer"
+			company="ScrumWorks"
+			location={t('czechRepublic')}
+			start={2024}
+			end={2024}
+		>
+			{t('scrumWorksExperience')}
+		</Experience>
+
+		<Project title="amateurs.com">
+			(React, Next.js, TS, tailwindcss, shadcn/ui, Radix, Ant Design, zod,
+			Turborepo, Vite, tsup, Storybook, Web Components, GraphQL Mesh)
+		</Project>
+
+		<Experience
 			position="Full-stack Developer"
 			url="https://blaze.codes/"
 			link="blaze.codes"
 			company="Blaze Company"
-			location={'Ostrava, ' + t('czechRepublic')}
+			location={t('czechRepublic')}
 			start={2023}
+			end={2024}
 		>
 			{t('blazeExperience')}
 		</Experience>
 
 		<Project url="https://www.xalarm.cz/" link="xalarm.cz">
 			(React, React Native, TS, Expo, Next.js, tRPC, Prisma, Stripe, RevenueCat,
-			tailwindcss, shadcn/ui, zod)
+			tailwindcss, shadcn/ui, Radix, zod)
 		</Project>
 		<Project url="https://spudnow.co.uk/" link="spudnow.co.uk">
 			(React Native, TS, Expo, Redux Toolkit, NativeBase, yup)
 		</Project>
 		<Project url="https://izzy.cz/" link="izzy.cz">
 			(React, Vue, TS, Remix, NestJS, MongoDB, TanStack Query, Stripe,
-			tailwindcss, shadcn/ui, zod, Vite)
+			tailwindcss, shadcn/ui, Radix, zod, Vite)
 		</Project>
 		<Project title="Winning Tipsters">
-			(React, TS, Remix, NestJS, Prisma, clerk, tailwindcss, shadcn/ui, zod,
-			Vite)
+			(React, TS, Remix, NestJS, Prisma, clerk, tailwindcss, shadcn/ui, Radix,
+			zod, Vite)
 		</Project>
 
 		<Experience
@@ -84,7 +128,7 @@ const t = useTranslations(lang)
 			url="https://www.royal-fox.cz/"
 			link="royal-fox.cz"
 			company="Royal Fox"
-			location={'Ostrava, ' + t('czechRepublic')}
+			location={t('czechRepublic')}
 			start={2023}
 			end={2023}
 		>
@@ -99,7 +143,7 @@ const t = useTranslations(lang)
 		<Experience
 			position="Freelance"
 			company={t('selfEmployed')}
-			location={'Ostrava, ' + t('czechRepublic')}
+			location={t('czechRepublic')}
 			start={2022}
 		>
 			{t('freelanceExperience')}
