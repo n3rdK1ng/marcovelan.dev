@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl } from '../i18n/utils'
+import PostHog from '../components/posthog.astro'
 import '../styles/global.css'
 
 interface Props {
@@ -21,6 +22,7 @@ const lang = getLangFromUrl(Astro.url)
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<PostHog />
 		<!-- Cal element-click embed code begins -->
 		<script type="text/javascript">
 			;(function (C, A, L) {
