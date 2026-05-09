@@ -1,1 +1,17 @@
-<h2 class="mb-4 mt-10 text-3xl font-semibold"><slot /></h2>
+---
+interface Props {
+	num?: string
+}
+
+const { num } = Astro.props
+---
+
+<div class="reveal mt-16 mb-2 lg:mt-24">
+	<div class="mb-4 flex items-center gap-3">
+		{num && <span class="font-mono text-xs text-gold">{num}</span>}
+		<div class="h-px flex-1 bg-rule"></div>
+	</div>
+	<h2 class="font-display text-2xl tracking-tight lg:text-3xl" style="font-style: italic;">
+		<slot />
+	</h2>
+</div>

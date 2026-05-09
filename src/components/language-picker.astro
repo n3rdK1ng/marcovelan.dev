@@ -6,16 +6,20 @@ const lang = getLangFromUrl(Astro.url)
 const translatePath = useTranslatedPath(lang)
 ---
 
-<div class="flex flex-row-reverse justify-start gap-2 text-xl text-white">
+<div class="flex items-center gap-3 font-mono text-xs">
 	{
-		Object.entries(languages).map(([lang, label]) => (
-			<p
-				class:list={
-					lang === getLangFromUrl(Astro.url) ? 'underline' : 'hover:underline'
-				}
+		Object.entries(languages).map(([l, label]) => (
+			<a
+				href={translatePath('/', l)}
+				class:list={[
+					'transition-colors duration-300',
+					l === getLangFromUrl(Astro.url)
+						? 'text-gold'
+						: 'text-ash hover:text-stone',
+				]}
 			>
-				<a href={translatePath('/', lang)}>{label}</a>
-			</p>
+				{label}
+			</a>
 		))
 	}
 </div>

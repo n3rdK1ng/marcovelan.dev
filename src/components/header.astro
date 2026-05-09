@@ -3,18 +3,20 @@ import GitLink from './git-link.astro'
 import LanguagePicker from './language-picker.astro'
 ---
 
-<header class="container bg-zinc-900 [view-transition-name:site-header]">
-	<div class="flex flex-col justify-between gap-16 lg:gap-32">
+<header class="container pt-10 pb-6 lg:pt-16 lg:pb-10 [view-transition-name:site-header]">
+	<nav class="flex items-center justify-between mb-20 lg:mb-28">
 		<LanguagePicker />
-		<div class="flex items-center justify-between gap-4">
-			<h1 class="text-5xl font-bold lg:text-7xl lg:font-extrabold">
-				<div
-					class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-				>
-					Marco Velan
-				</div>
-			</h1>
-			<GitLink />
-		</div>
+		<GitLink />
+	</nav>
+	<div class="reveal">
+		<h1
+			class="font-display text-6xl leading-[0.9] tracking-tight lg:text-8xl"
+			style="font-style: italic;"
+		>
+			Marco
+			<br />
+			Velan
+		</h1>
+		<div class="mt-6 h-px w-12 bg-gold"></div>
 	</div>
 </header>

@@ -6,8 +6,10 @@ interface Props {
 const { year } = Astro.props
 ---
 
-<p>
-	{year}
-	<em>–</em>
-	<slot />
-</p>
+<div class="flex items-baseline gap-4">
+	<span class="font-mono text-sm text-gold">{year}</span>
+	<div class="h-px w-4 bg-rule"></div>
+	<p class="text-sm text-stone">
+		<slot />
+	</p>
+</div>

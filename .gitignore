@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # claude code workspaces
 .claude/
+
+# playwright mcp artifacts
+.playwright-mcp/

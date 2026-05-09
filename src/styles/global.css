@@ -1,9 +1,94 @@
 @import "tailwindcss";
 
-.container {
-	@apply mx-auto p-6 lg:px-32 max-w-5xl;
+@theme {
+	--color-surface: #050505;
+	--color-elevated: #0c0c0b;
+	--color-cream: #f0ece4;
+	--color-stone: #8a8578;
+	--color-ash: #504d47;
+	--color-gold: #c9a87c;
+	--color-rule: #1a1917;
+	--font-display: 'Instrument Serif', Georgia, serif;
+	--font-body: 'Outfit', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
+html {
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	font-family: var(--font-body);
+	background-color: var(--color-surface);
+	color: var(--color-cream);
+}
+
+/* Grain texture overlay */
+body::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	pointer-events: none;
+	opacity: 0.03;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	background-repeat: repeat;
+	background-size: 256px;
+}
+
+/* Scroll-reveal */
+.reveal {
+	opacity: 0;
+	transform: translateY(20px);
+	transition:
+		opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Container */
+.container {
+	@apply mx-auto px-6 lg:px-16 max-w-3xl;
+}
+
+/* Selection */
+::selection {
+	background-color: rgb(201 168 124 / 0.3);
+	color: var(--color-cream);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+	width: 5px;
+}
+::-webkit-scrollbar-track {
+	background: var(--color-surface);
+}
+::-webkit-scrollbar-thumb {
+	background: var(--color-ash);
+	border-radius: 3px;
+}
+
+/* Animated underline link */
+.link-gold {
+	text-decoration: none;
+	background-image: linear-gradient(var(--color-gold), var(--color-gold));
+	background-size: 0% 1px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+	transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-gold:hover {
+	background-size: 100% 1px;
+}
+
+/* View transitions (language switch) */
 ::view-transition-old(root),
 ::view-transition-new(root) {
 	animation-duration: 300ms;
