@@ -19,7 +19,7 @@ const t = useTranslations(lang)
 >
 	<Header />
 
-	<section class="bg-zinc-900 container text-zinc-200">
+	<section class="container bg-zinc-900 text-zinc-200">
 		<p class="border-l-2 border-l-white pl-4">
 			{t('hero1')}
 			<br />
@@ -52,6 +52,20 @@ const t = useTranslations(lang)
 		</p>
 		<Separator />
 		<Heading>💻 {t('experience')}</Heading>
+		<Experience
+			position="Fullstack Lead"
+			company="GoPortal"
+			location={t('czechRepublic')}
+			start={2025}
+		>
+			{t('goportalExperience')}
+		</Experience>
+
+		<Project link="goportal.cz" url="https://www.goportal.cz/">
+			(React, TS, TanStack Start, TanStack Router, TanStack Query, TanStack
+			Form, tailwindcss, shadcn/ui, Radix, zod, Drizzle, PostgreSQL, Docker)
+		</Project>
+
 		<Experience
 			position="Frontend Lead"
 			company="GoMobil"
