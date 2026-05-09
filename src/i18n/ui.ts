@@ -50,6 +50,8 @@ export const ui = {
 			'Leading the development of a comprehensive self-service platform for a telecommunications provider. Working on both web and mobile application, migrating a legacy system with around 50,000 active users to a modern, maintainable architecture using cutting-edge technologies.',
 		goenergyExperience:
 			'Consulting on mobile application development and continuous delivery automation. Providing expertise in modern mobile development practices and helping to streamline the deployment process for a more efficient development workflow.',
+		goportalExperience:
+			'Leading the development of an enterprise self-service platform that serves multiple organizations and their employees from a single multi-tenant system. Owning it end to end – architecture, API and database design, and the user-facing application – while setting the technical direction and mentoring the team.',
 	},
 	cs: {
 		resume: 'Životopis',
@@ -94,6 +96,8 @@ export const ui = {
 			'Vedoucí vývoje komplexní samoobslužné platformy pro telekomunikačního operátora. Pracuji na webové i mobilní aplikaci, migruji legacy systém s přibližně 50 000 aktivními uživateli na moderní, udržovatelnou architekturu využívající nejnovější technologie.',
 		goenergyExperience:
 			'Konzultace v oblasti vývoje mobilních aplikací a automatizace kontinuálního nasazování. Poskytování odborných znalostí v moderních postupech mobilního vývoje a pomoc při optimalizaci procesu nasazování pro efektivnější vývojový workflow.',
+		goportalExperience:
+			'Vedu vývoj podnikové samoobslužné platformy, která z jednoho systému obsluhuje více organizací a jejich zaměstnance. Zodpovídám za celé řešení od architektury přes návrh API a databáze až po uživatelskou aplikaci, určuji technický směr a věnuji se rozvoji týmu.',
 	},
 } as const
 
