@@ -1,0 +1,83 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<section class="hero">
+	<div>
+		<div class="hero-eyebrow">{t('heroEyebrow')}</div>
+		<h1>
+			<Fragment set:html={t('heroHeadline')} />
+		</h1>
+		<div class="hero-ledes">
+			<p class="hero-lede">{t('hero1')}</p>
+			<p class="hero-lede">{t('hero2')}</p>
+		</div>
+	</div>
+
+	<aside class="meta-card" aria-label="Contact">
+		<div class="meta-row">
+			<div class="meta-label">Email</div>
+			<div class="meta-value" id="email-row">
+				<a href="mailto:marco.velan10@gmail.com">marco.velan10@gmail.com</a>
+				<button type="button" id="copy-email" title={t('copy')}>{t('copy')}</button>
+				<span class="copy-pill" aria-live="polite">{t('copied')} ✓</span>
+			</div>
+		</div>
+		<div class="meta-row">
+			<div class="meta-label">LinkedIn</div>
+			<div class="meta-value">
+				<a
+					href="https://www.linkedin.com/in/marcovelan/"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					linkedin.com/in/marcovelan
+				</a>
+			</div>
+		</div>
+		<div class="meta-row">
+			<div class="meta-label">GitHub</div>
+			<div class="meta-value">
+				<a
+					href="https://github.com/n3rdK1ng"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					github.com/n3rdK1ng
+				</a>
+			</div>
+		</div>
+		<div class="meta-row">
+			<div class="meta-label">{t('calendar')}</div>
+			<div class="meta-value">
+				<button
+					type="button"
+					data-cal-link="marcovelan/job-offer"
+					data-cal-namespace=""
+					data-cal-config='{"layout":"month_view"}'
+				>
+					{t('bookSlot')} ↗
+				</button>
+			</div>
+		</div>
+		<div class="meta-row">
+			<div class="meta-label">{t('basedIn')}</div>
+			<div class="meta-value">{t('czechRepublic')} · CET</div>
+		</div>
+	</aside>
+</section>
+
+<script>
+	const copyBtn = document.getElementById('copy-email')
+	const emailRow = document.getElementById('email-row')
+	copyBtn?.addEventListener('click', async () => {
+		try {
+			await navigator.clipboard.writeText('marco.velan10@gmail.com')
+			emailRow?.classList.add('copied')
+			setTimeout(() => emailRow?.classList.remove('copied'), 1500)
+		} catch (e) {}
+	})
+</script>

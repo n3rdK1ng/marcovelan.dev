@@ -6,8 +6,7 @@ interface Props {
 const { year } = Astro.props
 ---
 
-<p>
-	{year}
-	<em>–</em>
-	<slot />
-</p>
+<li>
+	<span class="ach-year">{year}</span>
+	<span class="ach-text"><slot /></span>
+</li>

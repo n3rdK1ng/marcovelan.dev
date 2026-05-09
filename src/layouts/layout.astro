@@ -2,6 +2,8 @@
 import { ClientRouter } from 'astro:transitions'
 import { getLangFromUrl } from '../i18n/utils'
 import PostHog from '../components/posthog.astro'
+import Topbar from '../components/topbar.astro'
+import Footer from '../components/footer.astro'
 import '../styles/global.css'
 
 interface Props {
@@ -10,7 +12,6 @@ interface Props {
 }
 
 const { title, description } = Astro.props
-
 const lang = getLangFromUrl(Astro.url)
 ---
 
@@ -19,11 +20,19 @@ const lang = getLangFromUrl(Astro.url)
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" property="og:description" content={description} />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<ClientRouter />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+
 		<PostHog />
 		<!-- Cal element-click embed code begins -->
 		<script type="text/javascript">
@@ -69,24 +78,9 @@ const lang = getLangFromUrl(Astro.url)
 		</script>
 		<!-- Cal element-click embed code ends -->
 	</head>
-	<body
-		class="h-full w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-	>
+	<body>
+		<Topbar />
 		<slot />
+		<Footer />
 	</body>
 </html>
-<style is:global>
-	html {
-		font-family:
-			ui-sans-serif,
-			-apple-system,
-			BlinkMacSystemFont,
-			'Segoe UI',
-			Helvetica,
-			'Apple Color Emoji',
-			Arial,
-			sans-serif,
-			'Segoe UI Emoji',
-			'Segoe UI Symbol';
-	}
-</style>

@@ -1,0 +1,75 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+
+interface Props {
+	position: string
+	company: string
+	companyUrl?: string
+	location: string
+	start: number
+	end?: number
+	stack?: string[]
+}
+
+const { position, company, companyUrl, location, start, end, stack } = Astro.props
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const ongoing = end === undefined
+const yearsLabel = ongoing ? `${start} —` : start === end ? `${start}` : `${start} — ${end}`
+const hasProjects = Astro.slots.has('projects')
+---
+
+<article class="role">
+	<div class="role-years">
+		{yearsLabel}
+		{ongoing && <span class="now">{t('present')}</span>}
+	</div>
+	<div>
+		<header class="role-head">
+			<h3 class="role-position">{position}</h3>
+			<span class="role-company">
+				{
+					companyUrl ? (
+						<a href={companyUrl} target="_blank" rel="noopener noreferrer">
+							{company}
+						</a>
+					) : (
+						company
+					)
+				}
+			</span>
+		</header>
+		<div class="role-meta">
+			<span>{location}</span>
+			{
+				companyUrl && (
+					<>
+						<span class="dot">·</span>
+						<a href={companyUrl} target="_blank" rel="noopener noreferrer">
+							{companyUrl.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')} ↗
+						</a>
+					</>
+				)
+			}
+		</div>
+		<p class="role-blurb"><slot /></p>
+		{
+			stack && !hasProjects && (
+				<div class="stack">
+					{stack.map((s) => (
+						<span>{s}</span>
+					))}
+				</div>
+			)
+		}
+		{
+			hasProjects && (
+				<div class="role-projects">
+					<slot name="projects" />
+				</div>
+			)
+		}
+	</div>
+</article>

@@ -1,0 +1,50 @@
+---
+import LanguagePicker from './language-picker.astro'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const tp = useTranslatedPath(lang)
+---
+
+<header class="topbar">
+	<div class="topbar-inner">
+		<a href={tp('/') + '#top'} class="brand">
+			<span class="brand-mark" aria-hidden="true"></span>
+			<span>Marco Velan</span>
+		</a>
+		<nav class="nav" aria-label="Sections">
+			<a href="#experience">{t('experience')}</a>
+			<span class="nav-sep">·</span>
+			<a href="#languages">{t('languages')}</a>
+			<span class="nav-sep">·</span>
+			<a href="#hobbies">{t('hobbies')}</a>
+			<span class="nav-sep">·</span>
+			<a href="#achievements">{t('achievemets')}</a>
+		</nav>
+		<LanguagePicker />
+	</div>
+</header>
+
+<script>
+	document.querySelectorAll<HTMLAnchorElement>('.nav a, .brand').forEach((a) => {
+		a.addEventListener('click', (e) => {
+			const href = a.getAttribute('href')
+			if (!href) return
+			const hashIndex = href.indexOf('#')
+			if (hashIndex === -1) return
+			const hash = href.slice(hashIndex)
+			const sameDoc =
+				hashIndex === 0 ||
+				href.slice(0, hashIndex) === window.location.pathname ||
+				href.slice(0, hashIndex) === ''
+			if (!sameDoc) return
+			const target = document.querySelector(hash)
+			if (target instanceof HTMLElement) {
+				e.preventDefault()
+				window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' })
+				history.replaceState(null, '', hash)
+			}
+		})
+	})
+</script>

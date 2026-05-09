@@ -1,21 +1,20 @@
 ---
-import { languages } from '../i18n/ui'
+import { ui } from '../i18n/ui'
 import { getLangFromUrl, useTranslatedPath } from '../i18n/utils'
 
-const lang = getLangFromUrl(Astro.url)
-const translatePath = useTranslatedPath(lang)
+const currentLang = getLangFromUrl(Astro.url)
+const translatePath = useTranslatedPath(currentLang)
 ---
 
-<div class="flex flex-row-reverse justify-start gap-2 text-xl text-white">
+<div class="lang-toggle" role="group" aria-label="Language">
 	{
-		Object.entries(languages).map(([lang, label]) => (
-			<p
-				class:list={
-					lang === getLangFromUrl(Astro.url) ? 'underline' : 'hover:underline'
-				}
+		Object.keys(ui).map((lang) => (
+			<a
+				href={translatePath('/', lang)}
+				aria-current={lang === currentLang ? 'true' : 'false'}
 			>
-				<a href={translatePath('/', lang)}>{label}</a>
-			</p>
+				{lang}
+			</a>
 		))
 	}
 </div>

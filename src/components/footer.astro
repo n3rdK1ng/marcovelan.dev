@@ -1,0 +1,21 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<footer class="site">
+	<span class="sig">— Marco Velan</span>
+	<span>
+		{t('builtWith')} ·
+		<a
+			href="https://github.com/n3rdK1ng/marcovelan.dev"
+			target="_blank"
+			rel="noopener noreferrer"
+			aria-label={t('viewGithub')}
+		>
+			GitHub ↗
+		</a>
+	</span>
+</footer>

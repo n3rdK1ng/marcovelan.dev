@@ -1,13 +1,24 @@
 ---
 import Layout from '../layouts/layout.astro'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const tp = useTranslatedPath(lang)
 ---
 
-<Layout title="Marco Velan: Resume" description="Marco Velan: Resume">
-	<div class="flex justify-center">
-		<div class="container bg-zinc-900 lg:px-32">
-			<div class="grid min-h-screen place-items-center">
-				<h1 class="text-5xl">⛔️</h1>
-			</div>
-		</div>
-	</div>
+<Layout title="404 — Marco Velan" description="Page not found">
+	<main class="shell" style="text-align:center;">
+		<div class="hero-eyebrow" style="justify-content:center;">404</div>
+		<h1
+			style="font-family:var(--font-display);font-size:clamp(48px,8vw,96px);line-height:0.95;letter-spacing:-0.025em;margin:0 0 24px;"
+		>
+			Not <em style="font-style:italic;color:var(--accent);">found</em>.
+		</h1>
+		<p class="hero-lede" style="margin:0 auto;">
+			<a href={tp('/')} style="border-bottom:1px solid var(--rule);padding-bottom:1px;">
+				← {t('resume')}
+			</a>
+		</p>
+	</main>
 </Layout>
