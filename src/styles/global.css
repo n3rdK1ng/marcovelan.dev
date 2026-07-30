@@ -3,3 +3,22 @@
 .container {
 	@apply mx-auto p-6 lg:px-32 max-w-5xl;
 }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 300ms;
+	animation-timing-function: ease-out;
+}
+
+/*
+ * Mirrors astro/components/viewtransitions.css. ClientRouter only ships that
+ * stylesheet when a component uses a `transition:*` directive; this site names
+ * its transitions in plain CSS, so the rule is added here explicitly.
+ */
+@media (prefers-reduced-motion) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}
