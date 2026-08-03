@@ -1,0 +1,55 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<section class="pb-16 pt-12 sm:pb-20 sm:pt-16">
+	<h1
+		class="font-display text-ink rise rise-1 text-[clamp(3rem,13vw,5.5rem)] font-extrabold leading-[0.9] tracking-[-0.045em]"
+	>
+		Marco Velan
+	</h1>
+	<p
+		class="font-display text-ink rise rise-2 mt-4 text-[1.5rem] font-medium tracking-[-0.02em]"
+	>
+		{t('role')}
+	</p>
+	<div class="rise rise-3 mt-8 max-w-[38rem] space-y-4">
+		<p class="text-[1.125rem] leading-[1.6]">{t('hero1')}</p>
+		<p>{t('hero2')}</p>
+	</div>
+	<div class="rise rise-4 mt-9 flex flex-wrap gap-2.5">
+		<a
+			class="action"
+			href="mailto:marco.velan10@gmail.com"
+			data-print="marco.velan10@gmail.com"
+		>
+			Email
+		</a>
+		<a
+			class="action"
+			href="https://www.linkedin.com/in/marcovelan/"
+			target="_blank"
+			rel="noopener noreferrer"
+			data-print="linkedin.com/in/marcovelan"
+		>
+			LinkedIn
+		</a>
+		<!--
+			A real link, so it still books a call with JS off. The Cal embed
+			intercepts the click on `data-cal-link` and opens its modal instead.
+		-->
+		<a
+			class="action action-primary"
+			href="https://cal.com/marcovelan/job-offer"
+			data-cal-link="marcovelan/job-offer"
+			data-cal-namespace=""
+			data-cal-config='{"layout":"month_view"}'
+			data-print="cal.com/marcovelan/job-offer"
+		>
+			{t('bookCall')}
+		</a>
+	</div>
+</section>

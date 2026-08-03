@@ -6,8 +6,9 @@ interface Props {
 const { year } = Astro.props
 ---
 
-<p>
-	{year}
-	<em>–</em>
-	<slot />
-</p>
+<li
+	class="border-line grid grid-cols-[auto_1fr] items-baseline gap-x-4 border-t py-3"
+>
+	<span class="meta text-accent">{year}</span>
+	<span><slot /></span>
+</li>

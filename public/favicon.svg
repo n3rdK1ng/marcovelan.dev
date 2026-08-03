@@ -1,19 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
-	<g clip-path="url(#clip0_1_5)">
-		<path
-			d="M18.4242 108.726L40.3636 27.1815L66.1818 72.8958L91.8788 27.5521L119.03 127.876L127.879 127.012L94.5455 4.07724L66.1818 54.363L37.5758 4.32434L8.72727 108.726H18.4242Z" />
-		<path fill-rule="evenodd" clip-rule="evenodd"
-			d="M120.364 21.9923H110.424L66.303 102.054L35.3939 47.444L32 59.6757L66.1818 120.587L120.364 21.9923ZM25.0909 47.444L28.4849 35.0888L8.84849 0.123528L7.51019e-06 2.59457L25.0909 47.444Z" />
-	</g>
-	<defs>
-		<clipPath id="clip0_1_5">
-			<rect width="128" height="128" transform="matrix(-1 0 0 -1 128 128)" />
-		</clipPath>
-	</defs>
-	<style>
-		path { fill: #000; }
-		@media (prefers-color-scheme: dark) {
-		path { fill: #FFF; }
-		}
-	</style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+	<rect width="64" height="64" rx="14" fill="#1B2CC1" />
+	<text
+		x="32"
+		y="41"
+		fill="#FFFFFF"
+		font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+		font-size="25"
+		font-weight="700"
+		letter-spacing="-1"
+		text-anchor="middle">MV</text>
 </svg>

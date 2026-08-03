@@ -1,6 +1,6 @@
 export const languages = {
-	en: '🇺🇸',
-	cs: '🇨🇿',
+	en: 'EN',
+	cs: 'CS',
 }
 
 export const defaultLang = 'en'
@@ -9,95 +9,100 @@ export const ui = {
 	en: {
 		resume: 'Resume',
 		viewGithub: 'View source on GitHub',
+		metaDescription:
+			'Marco Velan — fullstack engineer & tech lead from the Czech Republic. From architecture and APIs to web and mobile apps in TypeScript.',
+		role: 'Fullstack engineer & tech lead',
 		hero1:
-			'I am a software developer with a passion for creating user-friendly interfaces.',
+			'I build products end to end — from architecture, APIs and data models to the interfaces people actually use.',
 		hero2:
-			'My current focus is on web and mobile development, where I prefer to work with React and TypeScript.',
-		contactInfo: 'Contact Information',
-		openCalendar: 'Open Calendar',
+			'Right now I lead development of self-service platforms used by tens of thousands of people: setting the technical direction, mentoring developers, and turning legacy systems into modern TypeScript applications for web and mobile.',
+		bookCall: 'Book a call',
 		experience: 'Experience',
 		czechRepublic: 'Czech Republic',
-		blazeExperience:
-			'At Blaze company I worked on various web/mobile projects for several clients. Such as XALARM, a new service with a mobile application for personal safety. Another notable project was Izzy, an application designed to simplify the process of scheduling and ordering home cleaning services.',
-		royalFoxExperience:
-			'Frontend engineer on the team responsible for creating the next revolution in the learning industry. ForClassmates is a platform that connects students and teachers in a new way.',
+		present: 'present',
 		selfEmployed: 'Self-employed',
+		goportalExperience:
+			'I lead development of an enterprise self-service platform that serves multiple organizations and their employees from a single multi-tenant system. I own it end to end — architecture, API and database design, and the user-facing application — while setting the technical direction and mentoring the team.',
+		gomobilExperience:
+			'I lead development of the self-service platform for a telecom provider, on web and on mobile. We are migrating a legacy system with around 50,000 active users to a modern, maintainable architecture.',
+		goenergyExperience:
+			'I consult on mobile development and CI/CD automation, making the path from commit to release smoother and more predictable.',
+		scrumWorksExperience:
+			'I helped migrate a community platform with over 20 years of history to a modern web application. It serves millions of active users worldwide, with both free and premium content.',
+		blazeExperience:
+			'I built web and mobile products for several clients — among them XALARM, a personal safety service with a mobile app, and Izzy, an app for booking home cleaning services.',
+		royalFoxExperience:
+			'I built the frontend of ForClassmates, a platform that connects students and teachers, focusing on rich text editing and math rendering in the browser.',
 		freelanceExperience:
-			'I started my journey in the world of software development by creating and maintaining websites for local businesses. I am always choosing the cutting edge technologies to make sure my clients are getting the best possible product.',
+			'I started out building and maintaining websites for local businesses. I still take on select projects when they are a good fit.',
 		languages: 'Languages',
 		czech: 'Czech',
-		native: 'Native speaker',
 		english: 'English',
-		comfort: 'Comfortable spoken and written',
 		croatian: 'Croatian',
-		commuticable: 'Able to comunicate',
 		spanish: 'Spanish',
-		basic: 'Bit more than the basics',
+		native: 'Native speaker',
+		englishLevel: 'Fluent, spoken and written',
+		croatianLevel: 'Conversational',
+		spanishLevel: 'A bit more than the basics',
 		hobbies: 'Hobbies',
-		hobby1: 'Discovering the nature',
+		hobby1: 'Discovering nature',
 		hobby2: 'Automating the world around me',
-		hobby3: 'Tech Discovery and Mastery',
-		hobby4: 'Working on my healthy mindset',
-		achievemets: 'Achievements',
+		hobby3: 'Discovering and mastering new tech',
+		hobby4: 'Working on a healthy mindset',
+		achievements: 'Achievements',
 		achievement1: 'Went on the same voyage as my namesake.',
 		achievement2:
 			'Allowed by the Czech court to do adult stuff before the age of 18.',
-		achievement3: 'I have lifted 300kg several times on my own.',
-		present: 'present',
-		scrumWorksExperience:
-			'Frontend developer who worked on a large-scale community platform migration. Contributed to the transformation of a legacy system with over 20 years of history into a modern web application, serving millions of active users worldwide with both free and premium content.',
-		gomobilExperience:
-			'Leading the development of a comprehensive self-service platform for a telecommunications provider. Working on both web and mobile application, migrating a legacy system with around 50,000 active users to a modern, maintainable architecture using cutting-edge technologies.',
-		goenergyExperience:
-			'Consulting on mobile application development and continuous delivery automation. Providing expertise in modern mobile development practices and helping to streamline the deployment process for a more efficient development workflow.',
-		goportalExperience:
-			'Leading the development of an enterprise self-service platform that serves multiple organizations and their employees from a single multi-tenant system. Owning it end to end – architecture, API and database design, and the user-facing application – while setting the technical direction and mentoring the team.',
+		achievement3: 'I have lifted 300 kg several times on my own.',
 	},
 	cs: {
 		resume: 'Životopis',
 		viewGithub: 'Zobrazit zdrojový kód na GitHubu',
+		metaDescription:
+			'Marco Velan — fullstack vývojář a tech lead z Česka. Od architektury a API až po webové a mobilní aplikace v TypeScriptu.',
+		role: 'Fullstack vývojář & tech lead',
 		hero1:
-			'Jsem softwarový vývojář s nadšením pro vytváření uživatelsky přívětivých prostředí.',
+			'Stavím produkty od začátku do konce — od architektury, API a datového modelu až po rozhraní, které lidé nakonec používají.',
 		hero2:
-			'V současné době se zaměřuji na vývoj webových a mobilních aplikací, kde nejraději využívám React a TypeScript.',
-		contactInfo: 'Kontaktní informace',
-		openCalendar: 'Otevřít kalendář',
+			'Teď vedu vývoj samoobslužných platforem, které používají desítky tisíc lidí: určuji technický směr, mentoruji vývojáře a měním legacy systémy v moderní aplikace v TypeScriptu pro web i mobil.',
+		bookCall: 'Domluvit hovor',
 		experience: 'Zkušenosti',
 		czechRepublic: 'Česká republika',
+		present: 'současnost',
+		selfEmployed: 'OSVČ',
+		goportalExperience:
+			'Vedu vývoj podnikové samoobslužné platformy, která z jednoho multi-tenant systému obsluhuje více organizací a jejich zaměstnance. Mám na starosti celé řešení — architekturu, návrh API i databáze a samotnou aplikaci pro uživatele — určuji technický směr a rozvíjím tým.',
+		gomobilExperience:
+			'Vedu vývoj samoobslužné platformy pro telekomunikačního operátora, na webu i na mobilu. Legacy systém s přibližně 50 000 aktivními uživateli převádíme na moderní a udržovatelnou architekturu.',
+		goenergyExperience:
+			'Konzultuji vývoj mobilních aplikací a automatizaci CI/CD. Cesta od commitu k releasu je díky tomu plynulejší a předvídatelnější.',
+		scrumWorksExperience:
+			'Podílel jsem se na migraci komunitní platformy s více než dvacetiletou historií na moderní webovou aplikaci. Slouží milionům aktivních uživatelů po celém světě, a to s bezplatným i prémiovým obsahem.',
 		blazeExperience:
-			'V Blaze company jsem pracoval na různých webových/mobilních projektech pro řadu klientů. Například XALARM, nová služba s mobilní aplikací pro osobní bezpečí. Dalším důležitým projektem byla aplikace Izzy, která má usnadnit proces plánování a objednávání úklidových služeb pro domácnosti.',
+			'Vyvíjel jsem webové a mobilní produkty pro několik klientů. Mezi ty výraznější patřily XALARM, služba pro osobní bezpečí s mobilní aplikací, a Izzy, aplikace na objednávání úklidu domácností.',
 		royalFoxExperience:
-			'Frontend engineer v týmu, který připravuje revoluci ve vzdělávacím průmyslu. ForClassmates je platforma, s níž se novým přístupem propojují studenti a učitelé.',
-		selfEmployed: 'Živnostník',
+			'Stavěl jsem frontend ForClassmates, platformy, která propojuje studenty a učitele. Soustředil jsem se na editor formátovaného textu a vykreslování matematických zápisů přímo v prohlížeči.',
 		freelanceExperience:
-			'Svou profesionální kariéru ve světě vývoje softwaru jsem začal tvořením a údržbou webových stránek pro místní podniky. Vždy si vybírám nejmodernější technologie, abych se ujistil, že mí zákazníci dostanou ten nejlepší možný výsledek.',
+			'Začínal jsem tvorbou a správou webů pro místní firmy. Vybrané projekty beru dodnes, když dávají smysl.',
 		languages: 'Jazyky',
 		czech: 'Čeština',
-		native: 'Rodilý mluvčí',
 		english: 'Angličtina',
-		comfort: 'Pohodlný mluvený a psaný projev',
 		croatian: 'Chorvatština',
-		commuticable: 'Schopen komunikovat',
 		spanish: 'Španělština',
-		basic: 'Trochu víc než jen základy',
+		native: 'Rodilý mluvčí',
+		englishLevel: 'Plynule slovem i písmem',
+		croatianLevel: 'Domluvím se',
+		spanishLevel: 'Trochu víc než základy',
 		hobbies: 'Koníčky',
 		hobby1: 'Objevování přírody',
 		hobby2: 'Automatizace světa kolem mě',
-		hobby3: 'Objevování a ovládání technologií',
-		hobby4: 'Práce na mém zdravém myšlení',
-		achievemets: 'Úspěchy',
+		hobby3: 'Objevování nových technologií do hloubky',
+		hobby4: 'Práce na zdravém nastavení hlavy',
+		achievements: 'Úspěchy',
 		achievement1: 'Vydal jsem se na stejnou cestu jako můj jmenovec.',
-		achievement2: 'Byl jsem českým soudem emancipován před dosažením 18 let.',
+		achievement2:
+			'Český soud mi dovolil dělat dospělácké věci ještě před osmnáctkou.',
 		achievement3: 'Opakovaně jsem vlastní silou zvedl 300 kg.',
-		present: 'současnost',
-		scrumWorksExperience:
-			'Frontend vývojář, který pracoval na migraci rozsáhlé komunitní platformy. Podílel se na transformaci legacy systému s více než 20 letou historií na moderní webovou aplikaci, která slouží milionům aktivních uživatelů po celém světě s bezplatným i prémiovým obsahem.',
-		gomobilExperience:
-			'Vedoucí vývoje komplexní samoobslužné platformy pro telekomunikačního operátora. Pracuji na webové i mobilní aplikaci, migruji legacy systém s přibližně 50 000 aktivními uživateli na moderní, udržovatelnou architekturu využívající nejnovější technologie.',
-		goenergyExperience:
-			'Konzultace v oblasti vývoje mobilních aplikací a automatizace kontinuálního nasazování. Poskytování odborných znalostí v moderních postupech mobilního vývoje a pomoc při optimalizaci procesu nasazování pro efektivnější vývojový workflow.',
-		goportalExperience:
-			'Vedu vývoj podnikové samoobslužné platformy, která z jednoho systému obsluhuje více organizací a jejich zaměstnance. Zodpovídám za celé řešení od architektury přes návrh API a databáze až po uživatelskou aplikaci, určuji technický směr a věnuji se rozvoji týmu.',
 	},
 } as const
 
