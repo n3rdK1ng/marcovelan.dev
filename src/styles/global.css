@@ -19,11 +19,75 @@
 		monospace;
 }
 
+/* Dark ----------------------------------------------------------------------
+ * Same blueprint, inverted: blue-black paper, the same ultramarine family
+ * brightened until it survives on it, the same restraint. It follows the OS —
+ * there is no toggle. Every utility on the site resolves to a --color-* token,
+ * so re-pointing the tokens is almost the whole switch.
+ *
+ * `@theme` emits its tokens into the `theme` cascade layer and the components
+ * below live in the `components` layer; this block is unlayered, so it beats
+ * both wherever it sits in the file. The print block at the end wins over it in
+ * turn, on `!important` and on source order.
+ */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-paper: #0d1119;
+		--color-ink: #e6e9f0;
+		--color-ink-muted: #98a1b3;
+		--color-accent: #7c8aff;
+		/* The hover direction inverts with the scheme: brighter, not deeper. */
+		--color-accent-deep: #9aa6ff;
+		--color-chip: #161b27;
+		--color-line: #252c3c;
+	}
+
+	.grid-field {
+		background-image: linear-gradient(
+				to right,
+				rgba(124, 138, 255, 0.05) 1px,
+				transparent 1px
+			),
+			linear-gradient(to bottom, rgba(124, 138, 255, 0.05) 1px, transparent 1px);
+	}
+
+	::selection {
+		color: var(--color-paper);
+	}
+
+	/*
+	 * White on the brighter accent measures 3:1 and fails AA. Paper on it
+	 * measures 6.3:1, and 8.4:1 on the hover fill.
+	 */
+	.action-primary,
+	.action-primary:hover {
+		color: var(--color-paper);
+	}
+
+	/* The linked chip lifts off the surface here instead of blowing out to white. */
+	.chip.is-linked {
+		background-color: #1c2233;
+	}
+
+	/*
+	 * Chromium gives a cross-origin iframe an opaque canvas whenever its colour
+	 * scheme differs from the embedder's, and Cal's embed document declares
+	 * none — so a dark page puts the booker on a full-bleed white slab. The
+	 * embed is transparent by design and paints its own dark surfaces, so hand
+	 * the root the embed's scheme for as long as the modal is on screen. The
+	 * box is hidden with inline visibility when it closes; if that ever stops
+	 * being true, the worst case is a light scrollbar until the next load.
+	 */
+	html:has(cal-modal-box:not([style*='hidden'])) {
+		color-scheme: light;
+	}
+}
+
 @layer base {
 	html {
-		/* The site is light-only by design — stops dark UA scrollbars and form
-		 * controls when the OS is in dark mode. */
-		color-scheme: light;
+		/* Both schemes are designed for — let the UA dress scrollbars and form
+		 * controls to match whichever one the OS asks for. */
+		color-scheme: light dark;
 		background-color: var(--color-paper);
 		-webkit-text-size-adjust: 100%;
 	}
@@ -336,6 +400,21 @@
 @media print {
 	@page {
 		margin: 16mm;
+	}
+
+	/*
+	 * Paper is paper, whatever the OS scheme is: point the tokens back at black
+	 * on white before a single utility resolves them, so a dark-mode reader
+	 * never prints a dark-mode résumé.
+	 */
+	:root {
+		--color-paper: #fff;
+		--color-ink: #000;
+		--color-ink-muted: #000;
+		--color-accent: #000;
+		--color-accent-deep: #000;
+		--color-chip: #fff;
+		--color-line: #999;
 	}
 
 	/*
