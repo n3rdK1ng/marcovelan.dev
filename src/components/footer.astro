@@ -1,0 +1,20 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<footer
+	class="border-line mt-24 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t py-8"
+>
+	<a
+		class="link print-url font-mono text-[0.75rem] tracking-[0.02em]"
+		href="https://github.com/n3rdK1ng/marcovelan.dev"
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		{t('viewGithub')}
+	</a>
+	<p class="meta text-[0.75rem]">Astro · Tailwind</p>
+</footer>

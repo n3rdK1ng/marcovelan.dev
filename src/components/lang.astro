@@ -1,15 +1,33 @@
 ---
 interface Props {
-	lang: string
-	flag: string
+	name: string
 	level: string
+	/** 1-5, encoded as dots. Decorative — the level text carries the meaning. */
+	score: number
 }
 
-const { lang, flag, level } = Astro.props
+const { name, level, score } = Astro.props
+
+const dots = [1, 2, 3, 4, 5]
 ---
 
-<h3>
-	<b>{lang}</b>
-	{flag}
-	<p class="pl-4">{level}</p>
-</h3>
+<li
+	class="border-line grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 border-t py-3 sm:grid-cols-[8rem_auto_1fr]"
+>
+	<span class="text-ink font-medium">{name}</span>
+	<span class="flex items-center gap-[0.3125rem]" aria-hidden="true">
+		{
+			dots.map(dot => (
+				<span
+					class:list={[
+						'block h-[0.3125rem] w-[0.3125rem] rounded-full',
+						dot <= score
+							? 'bg-accent'
+							: 'bg-[color-mix(in_srgb,var(--color-ink-muted)_30%,transparent)]',
+					]}
+				/>
+			))
+		}
+	</span>
+	<span class="meta col-span-2 sm:col-span-1">{level}</span>
+</li>

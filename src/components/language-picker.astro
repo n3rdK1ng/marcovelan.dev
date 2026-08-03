@@ -1,21 +1,44 @@
 ---
 import { languages } from '../i18n/ui'
-import { getLangFromUrl, useTranslatedPath } from '../i18n/utils'
+import {
+	getLangFromUrl,
+	useTranslatedPath,
+	useTranslations,
+} from '../i18n/utils'
 
-const lang = getLangFromUrl(Astro.url)
-const translatePath = useTranslatedPath(lang)
+const current = getLangFromUrl(Astro.url)
+const translatePath = useTranslatedPath(current)
+const t = useTranslations(current)
+
+const entries = Object.entries(languages)
 ---
 
-<div class="flex flex-row-reverse justify-start gap-2 text-xl text-white">
+<nav
+	class="flex items-center gap-2 font-mono text-[0.8125rem]"
+	aria-label={t('languages')}
+>
 	{
-		Object.entries(languages).map(([lang, label]) => (
-			<p
-				class:list={
-					lang === getLangFromUrl(Astro.url) ? 'underline' : 'hover:underline'
-				}
-			>
-				<a href={translatePath('/', lang)}>{label}</a>
-			</p>
+		entries.map(([code, label], index) => (
+			<Fragment>
+				{index > 0 && (
+					<span class="text-line" aria-hidden="true">
+						/
+					</span>
+				)}
+				<a
+					href={translatePath('/', code)}
+					hreflang={code}
+					aria-current={code === current ? 'page' : undefined}
+					class:list={[
+						'tracking-[0.08em] transition-colors',
+						code === current
+							? 'text-accent underline decoration-1 underline-offset-4'
+							: 'text-ink-muted hover:text-ink',
+					]}
+				>
+					{label}
+				</a>
+			</Fragment>
 		))
 	}
-</div>
+</nav>

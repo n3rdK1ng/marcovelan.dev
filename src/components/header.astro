@@ -1,20 +1,23 @@
 ---
 import GitLink from './git-link.astro'
 import LanguagePicker from './language-picker.astro'
+import { getLangFromUrl, useTranslatedPath } from '../i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const translatePath = useTranslatedPath(lang)
 ---
 
-<header class="container bg-zinc-900 [view-transition-name:site-header]">
-	<div class="flex flex-col justify-between gap-16 lg:gap-32">
+<header
+	class="flex items-center justify-between gap-4 py-6 [view-transition-name:site-header]"
+>
+	<a
+		href={translatePath('/')}
+		class="text-ink hover:text-accent font-mono text-[0.8125rem] font-medium tracking-[0.02em] transition-colors"
+	>
+		marcovelan.dev
+	</a>
+	<div class="no-print flex items-center gap-5">
 		<LanguagePicker />
-		<div class="flex items-center justify-between gap-4">
-			<h1 class="text-5xl font-bold lg:text-7xl lg:font-extrabold">
-				<div
-					class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-				>
-					Marco Velan
-				</div>
-			</h1>
-			<GitLink />
-		</div>
+		<GitLink />
 	</div>
 </header>

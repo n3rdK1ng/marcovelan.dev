@@ -1,7 +1,315 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/instrument-sans';
+@import '@fontsource-variable/jetbrains-mono';
 
-.container {
-	@apply mx-auto p-6 lg:px-32 max-w-5xl;
+@theme {
+	--color-paper: #f4f6f9;
+	--color-ink: #14171c;
+	--color-ink-muted: #5a6472;
+	--color-accent: #1b2cc1;
+	--color-accent-deep: #131f8a;
+	--color-chip: #e9edf5;
+	--color-line: #d7deea;
+
+	--font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui,
+		sans-serif;
+	--font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo,
+		monospace;
+}
+
+@layer base {
+	html {
+		/* The site is light-only by design — stops dark UA scrollbars and form
+		 * controls when the OS is in dark mode. */
+		color-scheme: light;
+		background-color: var(--color-paper);
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		position: relative;
+		isolation: isolate;
+		min-height: 100svh;
+		background-color: var(--color-paper);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+		font-size: 1rem;
+		line-height: 1.65;
+		font-synthesis-weight: none;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	::selection {
+		background-color: var(--color-accent);
+		color: #fff;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 3px;
+	}
+}
+
+@layer components {
+	/*
+	 * Graph-paper texture. Lives behind the hero only and fades out before the
+	 * long reading sections. Sits at z-index -1 inside the body stacking
+	 * context, so it paints above the paper fill and below every glyph.
+	 */
+	.grid-field {
+		position: absolute;
+		inset: 0 0 auto 0;
+		z-index: -1;
+		height: 44rem;
+		pointer-events: none;
+		background-image: linear-gradient(
+				to right,
+				rgba(27, 44, 193, 0.05) 1px,
+				transparent 1px
+			),
+			linear-gradient(to bottom, rgba(27, 44, 193, 0.05) 1px, transparent 1px);
+		background-size: 28px 28px;
+		-webkit-mask-image: linear-gradient(
+			to bottom,
+			#000 0%,
+			#000 40%,
+			transparent 100%
+		);
+		mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);
+	}
+
+	.meta {
+		font-family: var(--font-mono);
+		font-size: 0.8125rem;
+		line-height: 1.5;
+		letter-spacing: 0.01em;
+		color: var(--color-ink-muted);
+		font-variant-numeric: tabular-nums;
+	}
+
+	.link {
+		color: var(--color-accent);
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
+		text-decoration-color: color-mix(
+			in srgb,
+			var(--color-accent) 35%,
+			transparent
+		);
+		transition:
+			color 140ms ease,
+			text-decoration-color 140ms ease;
+	}
+
+	.link:hover {
+		color: var(--color-accent-deep);
+		text-decoration-color: currentColor;
+	}
+
+	.action {
+		display: inline-flex;
+		align-items: center;
+		border: 1px solid var(--color-ink);
+		background-color: transparent;
+		padding: 0.6875rem 1.125rem;
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		font-weight: 500;
+		line-height: 1;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-ink);
+		cursor: pointer;
+		transition:
+			background-color 140ms ease,
+			border-color 140ms ease,
+			color 140ms ease;
+	}
+
+	.action:hover {
+		background-color: var(--color-ink);
+		border-color: var(--color-ink);
+		color: var(--color-paper);
+	}
+
+	/*
+	 * The one filled control on the page. White on --color-accent measures
+	 * 9.6:1, so the mono label clears AA and AAA at this size.
+	 */
+	.action-primary {
+		background-color: var(--color-accent);
+		border-color: var(--color-accent);
+		color: #fff;
+	}
+
+	.action-primary:hover {
+		background-color: var(--color-accent-deep);
+		border-color: var(--color-accent-deep);
+		color: #fff;
+	}
+
+	/* An accent ring would read as a halo on the accent fill — use ink. */
+	.action-primary:focus-visible {
+		outline: 2px solid var(--color-ink);
+		outline-offset: 3px;
+	}
+
+	/* Timeline rail --------------------------------------------------------- */
+
+	.timeline {
+		position: relative;
+		padding-left: 1.75rem;
+	}
+
+	.timeline::before {
+		content: '';
+		position: absolute;
+		top: 0.5rem;
+		bottom: 0.75rem;
+		left: calc(0.25rem - 0.5px);
+		width: 1px;
+		background-image: linear-gradient(
+			to bottom,
+			color-mix(in srgb, var(--color-accent) 45%, transparent),
+			color-mix(in srgb, var(--color-accent) 12%, transparent)
+		);
+	}
+
+	.entry {
+		position: relative;
+	}
+
+	.node {
+		position: absolute;
+		top: 0.4rem;
+		left: -1.75rem;
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 9999px;
+		background-color: var(--color-accent);
+	}
+
+	.node-current::after {
+		content: '';
+		position: absolute;
+		inset: -0.25rem;
+		border-radius: 9999px;
+		border: 1px solid var(--color-accent);
+		opacity: 0.45;
+	}
+
+	/* Stack chips ----------------------------------------------------------- */
+
+	.chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3125rem;
+	}
+
+	.chip {
+		border: 1px solid var(--color-line);
+		border-radius: 0.25rem;
+		background-color: var(--color-chip);
+		padding: 0.0625rem 0.4375rem;
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		line-height: 1.6;
+		letter-spacing: 0.01em;
+		color: var(--color-ink-muted);
+		white-space: nowrap;
+		transition:
+			background-color 120ms ease,
+			border-color 120ms ease,
+			color 120ms ease;
+	}
+
+	.chip.is-linked {
+		border-color: var(--color-accent);
+		background-color: #fff;
+		color: var(--color-accent);
+	}
+}
+
+/* Motion --------------------------------------------------------------------
+ * One orchestrated moment on load: the hero staggers in, the rail draws down.
+ */
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes rail-in {
+	from {
+		transform: scaleY(0);
+	}
+	to {
+		transform: scaleY(1);
+	}
+}
+
+@keyframes node-pulse {
+	0% {
+		opacity: 0.45;
+		transform: scale(1);
+	}
+	70%,
+	100% {
+		opacity: 0;
+		transform: scale(1.9);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.rise {
+		animation: rise 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	.rise-1 {
+		animation-delay: 0ms;
+	}
+
+	.rise-2 {
+		animation-delay: 40ms;
+	}
+
+	.rise-3 {
+		animation-delay: 80ms;
+	}
+
+	.rise-4 {
+		animation-delay: 120ms;
+	}
+
+	.timeline::before {
+		transform-origin: top;
+		animation: rail-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	.node-current::after {
+		animation: node-pulse 2600ms cubic-bezier(0.22, 1, 0.36, 1) infinite;
+	}
+
+	/*
+	 * First load only. ClientRouter swaps the document on every EN↔CS switch,
+	 * which would replay the whole entrance on top of the cross-fade — an inline
+	 * script in the layout flags the root on `astro:after-swap`. The ambient node
+	 * pulse is not part of the entrance and keeps running.
+	 */
+	html[data-loaded] .rise,
+	html[data-loaded] .timeline::before {
+		animation: none;
+	}
 }
 
 ::view-transition-old(root),
@@ -20,5 +328,117 @@
 	::view-transition-old(*),
 	::view-transition-new(*) {
 		animation: none !important;
+	}
+}
+
+/* Print --------------------------------------------------------------------- */
+
+@media print {
+	@page {
+		margin: 16mm;
+	}
+
+	/*
+	 * Printing right after load would otherwise capture the entrance mid-flight
+	 * — a half-faded hero and a rail drawn part of the way down.
+	 */
+	*,
+	*::before,
+	*::after {
+		animation: none !important;
+		transition: none !important;
+	}
+
+	.grid-field,
+	.no-print {
+		display: none !important;
+	}
+
+	html,
+	body {
+		background: #fff !important;
+		color: #000 !important;
+	}
+
+	a,
+	.link {
+		color: #000 !important;
+		text-decoration: none !important;
+	}
+
+	.meta,
+	.text-ink-muted,
+	.text-line {
+		color: #000 !important;
+	}
+
+	/*
+	 * Readers print with background graphics off by default, which drops every
+	 * background fill — the rail and its nodes would vanish. Borders always
+	 * print, so redraw both out of borders: the node keeps its 0.5rem footprint
+	 * (zero-size box + 0.25rem ring, rounded into a solid dot).
+	 */
+	.timeline::before {
+		width: 0 !important;
+		background: none !important;
+		border-left: 1px solid #000;
+	}
+
+	.node {
+		width: 0 !important;
+		height: 0 !important;
+		background: none !important;
+		border: 0.25rem solid #000;
+	}
+
+	.node-current::after {
+		display: none;
+	}
+
+	.chip {
+		background: #fff !important;
+		border-color: #999 !important;
+		color: #000 !important;
+	}
+
+	/*
+	 * Covers .action-primary too: browsers drop background fills when printing,
+	 * so its white label would otherwise print invisible.
+	 */
+	.action {
+		border: 0 !important;
+		padding: 0 !important;
+		background: transparent !important;
+		color: #000 !important;
+		letter-spacing: 0.04em;
+	}
+
+	/* A leading space would be trimmed here — the ::after is a flex item. */
+	.action[data-print]::after {
+		content: '\00a0' attr(data-print);
+		text-transform: none;
+		letter-spacing: 0;
+	}
+
+	.print-url::after {
+		content: ' (' attr(href) ')';
+		font-family: var(--font-mono);
+		font-size: 0.75em;
+	}
+
+	/*
+	 * Only blocks that fit on a page may claim break-inside: avoid. Experience
+	 * is taller than a sheet, and avoiding a break inside it cost a full blank
+	 * page before the timeline started.
+	 */
+	.entry,
+	.chips {
+		break-inside: avoid;
+	}
+
+	/* Never break inside a heading, and never leave one at the foot of a page. */
+	.section-head {
+		break-inside: avoid;
+		break-after: avoid;
 	}
 }

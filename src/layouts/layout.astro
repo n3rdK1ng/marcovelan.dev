@@ -7,26 +7,59 @@ import '../styles/global.css'
 interface Props {
 	title: string
 	description: string
+	/** Keeps a page out of the index — no canonical, no hreflang, no og card. */
+	noindex?: boolean
 }
 
-const { title, description } = Astro.props
+const { title, description, noindex = false } = Astro.props
 
 const lang = getLangFromUrl(Astro.url)
+
+const site = Astro.site ?? new URL('https://marcovelan.dev')
+const canonical = new URL(Astro.url.pathname, site).href
+const enHref = new URL('/', site).href
+const csHref = new URL('/cs/', site).href
+const ogImage = new URL('/og.png', site).href
 ---
 
 <!doctype html>
 <html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" property="og:description" content={description} />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		{
+			noindex ? (
+				<meta name="robots" content="noindex" />
+			) : (
+				<>
+					<link rel="canonical" href={canonical} />
+					<link rel="alternate" hreflang="en" href={enHref} />
+					<link rel="alternate" hreflang="cs" href={csHref} />
+					<link rel="alternate" hreflang="x-default" href={enHref} />
+					<meta property="og:type" content="profile" />
+					<meta property="og:title" content={title} />
+					<meta property="og:description" content={description} />
+					<meta property="og:url" content={canonical} />
+					<meta
+						property="og:locale"
+						content={lang === 'cs' ? 'cs_CZ' : 'en_US'}
+					/>
+					<meta property="og:image" content={ogImage} />
+					<meta property="og:image:width" content="1200" />
+					<meta property="og:image:height" content="630" />
+					<meta name="twitter:card" content="summary_large_image" />
+				</>
+			)
+		}
+		<meta name="theme-color" content="#f4f6f9" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
 		<ClientRouter />
 		<PostHog />
 		<!-- Cal element-click embed code begins -->
-		<script type="text/javascript">
+		<script is:inline type="text/javascript">
 			;(function (C, A, L) {
 				let p = function (a, ar) {
 					a.q.push(ar)
@@ -61,32 +94,90 @@ const lang = getLangFromUrl(Astro.url)
 			})(window, 'https://app.cal.com/embed/embed.js', 'init')
 			Cal('init', { origin: 'https://cal.com' })
 			Cal('ui', {
-				theme: 'dark',
-				styles: { branding: { brandColor: '#18181b' } },
+				theme: 'light',
+				cssVarsPerTheme: { light: { 'cal-brand': '#1B2CC1' } },
 				hideEventTypeDetails: true,
 				layout: 'month_view',
 			})
 		</script>
 		<!-- Cal element-click embed code ends -->
 	</head>
-	<body
-		class="h-full w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-	>
+	<body>
+		<div class="grid-field" aria-hidden="true"></div>
 		<slot />
+		<!--
+			Signature interaction: hovering any stack chip highlights every chip
+			with the same `data-tech` across the page. Delegated from `document`,
+			so it survives ClientRouter view transitions without re-init, and the
+			page is fully readable without it.
+		-->
+		<script is:inline>
+			;(() => {
+				if (window.__techLinkReady) return
+				window.__techLinkReady = true
+				const clear = () => {
+					for (const el of document.querySelectorAll('[data-tech].is-linked')) {
+						el.classList.remove('is-linked')
+					}
+				}
+				document.addEventListener('pointerover', event => {
+					const target = event.target
+					const chip =
+						target instanceof Element ? target.closest('[data-tech]') : null
+					clear()
+					if (!chip) return
+					const tech = chip.getAttribute('data-tech')
+					for (const el of document.querySelectorAll(
+						'[data-tech="' + tech + '"]',
+					)) {
+						el.classList.add('is-linked')
+					}
+				})
+				document.documentElement.addEventListener('pointerleave', clear)
+			})()
+		</script>
+		<!--
+			`Book a call` is a real link so it still works without JS. Cal's embed
+			opens its modal on any `[data-cal-link]` click but never cancels the
+			default action, so the browser would follow the href on top of it —
+			swallow the navigation once the embed is actually on the page.
+		-->
+		<script is:inline>
+			;(() => {
+				if (window.__calLinkReady) return
+				window.__calLinkReady = true
+				document.addEventListener('click', event => {
+					if (event.defaultPrevented || event.button !== 0) return
+					if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+						return
+					const target = event.target
+					const link =
+						target instanceof Element
+							? target.closest('a[data-cal-link]')
+							: null
+					if (!link) return
+					// `Cal.loaded` is set by the loader snippet before embed.js lands;
+					// `version` is only set once embed.js has actually run.
+					if (!window.Cal || !window.Cal.version) return
+					event.preventDefault()
+				})
+			})()
+		</script>
+		<!--
+			The entrance is a first-load moment. ClientRouter swaps the document on
+			every EN↔CS switch, which would restart the hero stagger and the rail
+			draw on top of the cross-fade — so mark the root as loaded on swap and
+			let the CSS opt out from there. Runs before the next paint, so the
+			animations never get a chance to start.
+		-->
+		<script is:inline>
+			;(() => {
+				if (window.__loadedFlagReady) return
+				window.__loadedFlagReady = true
+				document.addEventListener('astro:after-swap', () => {
+					document.documentElement.setAttribute('data-loaded', '')
+				})
+			})()
+		</script>
 	</body>
 </html>
-<style is:global>
-	html {
-		font-family:
-			ui-sans-serif,
-			-apple-system,
-			BlinkMacSystemFont,
-			'Segoe UI',
-			Helvetica,
-			'Apple Color Emoji',
-			Arial,
-			sans-serif,
-			'Segoe UI Emoji',
-			'Segoe UI Symbol';
-	}
-</style>

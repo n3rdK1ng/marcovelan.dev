@@ -1,12 +1,13 @@
 ---
+import Layout from '../layouts/layout.astro'
 import Achievement from './achievement.astro'
 import Experience from './experience.astro'
+import Footer from './footer.astro'
 import Header from './header.astro'
 import Heading from './heading.astro'
+import Hero from './hero.astro'
 import Lang from './lang.astro'
 import Project from './project.astro'
-import Separator from './separator.astro'
-import Layout from '../layouts/layout.astro'
 import { getLangFromUrl, useTranslations } from '../i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
@@ -15,182 +16,269 @@ const t = useTranslations(lang)
 
 <Layout
 	title={'Marco Velan: ' + t('resume')}
-	description={'Marco Velan: ' + t('resume')}
+	description={t('metaDescription')}
 >
-	<Header />
+	<div class="mx-auto w-full max-w-[44rem] px-6 lg:px-0">
+		<Header />
 
-	<section class="container bg-zinc-900 text-zinc-200">
-		<p class="border-l-2 border-l-white pl-4">
-			{t('hero1')}
-			<br />
-			<br />
-			{t('hero2')}
-		</p>
-		<Heading>📞 {t('contactInfo')}</Heading>
-		<p>
-			📧 &nbsp; <a class="hover:underline" href="mailto:marco.velan10@gmail.com"
-				>marco.velan10@gmail.com</a
-			>
-		</p>
-		<p>
-			🔗 &nbsp; <a
-				class="hover:underline"
-				target="_blank"
-				rel="noopener noreferrer"
-				href="https://www.linkedin.com/in/marcovelan/">LinkedIn</a
-			>
-		</p>
-		<p>
-			📆 &nbsp; <button
-				class="hover:underline"
-				data-cal-link="marcovelan/job-offer"
-				data-cal-namespace=""
-				data-cal-config='{"layout":"month_view"}'
-			>
-				{t('openCalendar')}
-			</button>
-		</p>
-		<Separator />
-		<Heading>💻 {t('experience')}</Heading>
-		<Experience
-			position="Fullstack Lead"
-			company="GoPortal"
-			location={t('czechRepublic')}
-			start={2025}
-		>
-			{t('goportalExperience')}
-		</Experience>
+		<main>
+			<Hero />
 
-		<Project title="app.goportal.cz">
-			(React, TS, TanStack Start, TanStack Router, TanStack Query, TanStack
-			Form, tailwindcss, shadcn/ui, Radix, zod, tRPC, Effect, Hono, Better Auth,
-			Drizzle, PostgreSQL, Vitest, Playwright, Sentry, Docker)
-		</Project>
+			<section aria-labelledby="experience">
+				<Heading id="experience">{t('experience')}</Heading>
+				<ol class="timeline">
+					<Experience
+						position="Fullstack Lead"
+						company="GoPortal"
+						location={t('czechRepublic')}
+						start={2025}
+						description={t('goportalExperience')}
+					>
+						<Project
+							name="app.goportal.cz"
+							stack={[
+								'React',
+								'TS',
+								'TanStack Start',
+								'TanStack Router',
+								'TanStack Query',
+								'TanStack Form',
+								'tailwindcss',
+								'shadcn/ui',
+								'Radix',
+								'zod',
+								'tRPC',
+								'Effect',
+								'Hono',
+								'Better Auth',
+								'Drizzle',
+								'PostgreSQL',
+								'Vitest',
+								'Playwright',
+								'Sentry',
+								'Docker',
+							]}
+						/>
+					</Experience>
 
-		<Experience
-			position="Frontend Lead"
-			company="GoMobil"
-			location={t('czechRepublic')}
-			start={2024}
-		>
-			{t('gomobilExperience')}
-		</Experience>
+					<Experience
+						position="Frontend Lead"
+						company="GoMobil"
+						location={t('czechRepublic')}
+						start={2024}
+						description={t('gomobilExperience')}
+					>
+						<Project
+							name="gomobil.cz"
+							url="https://www.gomobil.cz/"
+							stack={[
+								'React',
+								'React Native',
+								'Expo',
+								'TS',
+								'tailwindcss',
+								'NativeWind',
+								'rnr',
+								'rn-primitives',
+								'TanStack Start',
+								'TanStack Router',
+								'TanStack Query',
+								'TanStack Form',
+								'zod',
+								'EAS',
+								'Docker',
+							]}
+						/>
+					</Experience>
 
-		<Project link="gomobil.cz" url="https://www.gomobil.cz/">
-			(React, React Native, Expo, TS, tailwindcss, NativeWind, rnr,
-			rn-primitives, TanStack Start, TanStack Router, TanStack Query, TanStack
-			Form, zod, EAS, Docker)
-		</Project>
+					<Experience
+						position="IT Consultant"
+						company="GoEnergy"
+						location={t('czechRepublic')}
+						start={2024}
+						description={t('goenergyExperience')}
+					>
+						<Project
+							name="goenergy.cz"
+							url="https://www.goenergy.cz/"
+							stack={['React Native', 'Expo', 'TS', 'gluestack-ui', 'EAS']}
+						/>
+					</Experience>
 
-		<Experience
-			position="IT Consultant"
-			company="GoEnergy"
-			location={t('czechRepublic')}
-			start={2024}
-		>
-			{t('goenergyExperience')}
-		</Experience>
+					<Experience
+						position="Frontend Developer"
+						company="ScrumWorks"
+						location={t('czechRepublic')}
+						start={2024}
+						end={2024}
+						description={t('scrumWorksExperience')}
+					>
+						<Project
+							name="amateurs.com"
+							stack={[
+								'React',
+								'Next.js',
+								'TS',
+								'tailwindcss',
+								'shadcn/ui',
+								'Radix',
+								'Ant Design',
+								'zod',
+								'Turborepo',
+								'Vite',
+								'tsup',
+								'Storybook',
+								'Web Components',
+								'GraphQL Mesh',
+							]}
+						/>
+					</Experience>
 
-		<Project link="goenergy.cz" url="https://www.goenergy.cz/">
-			(React Native, Expo, TS, gluestack-ui, EAS)
-		</Project>
+					<Experience
+						position="Full-stack Developer"
+						company="Blaze Company"
+						url="https://blaze.codes/"
+						location={t('czechRepublic')}
+						start={2023}
+						end={2024}
+						description={t('blazeExperience')}
+					>
+						<Project
+							name="xalarm.cz"
+							url="https://www.xalarm.cz/"
+							stack={[
+								'React',
+								'React Native',
+								'TS',
+								'Expo',
+								'Next.js',
+								'tRPC',
+								'Prisma',
+								'Stripe',
+								'RevenueCat',
+								'tailwindcss',
+								'shadcn/ui',
+								'Radix',
+								'zod',
+							]}
+						/>
+						<Project
+							name="spudnow.co.uk"
+							url="https://spudnow.co.uk/"
+							stack={[
+								'React Native',
+								'TS',
+								'Expo',
+								'Redux Toolkit',
+								'NativeBase',
+								'yup',
+							]}
+						/>
+						<Project
+							name="izzy.cz"
+							url="https://izzy.cz/"
+							stack={[
+								'React',
+								'Vue',
+								'TS',
+								'Remix',
+								'NestJS',
+								'MongoDB',
+								'TanStack Query',
+								'Stripe',
+								'tailwindcss',
+								'shadcn/ui',
+								'Radix',
+								'zod',
+								'Vite',
+							]}
+						/>
+						<Project
+							name="Winning Tipsters"
+							stack={[
+								'React',
+								'TS',
+								'Remix',
+								'NestJS',
+								'Prisma',
+								'clerk',
+								'tailwindcss',
+								'shadcn/ui',
+								'Radix',
+								'zod',
+								'Vite',
+							]}
+						/>
+					</Experience>
 
-		<Experience
-			position="Frontend Developer"
-			company="ScrumWorks"
-			location={t('czechRepublic')}
-			start={2024}
-			end={2024}
-		>
-			{t('scrumWorksExperience')}
-		</Experience>
+					<Experience
+						position="Frontend Developer"
+						company="Royal Fox"
+						url="https://www.royal-fox.cz/"
+						location={t('czechRepublic')}
+						start={2023}
+						end={2023}
+						description={t('royalFoxExperience')}
+					>
+						<Project
+							name="forclassmates.com"
+							url="https://www.forclassmates.com/"
+							stack={[
+								'Vue',
+								'Nuxt',
+								'TS',
+								'Tiptap',
+								'Pinia',
+								'KaTeX',
+								'MathLive',
+								'Bootstrap',
+								'Sass',
+								'Element Plus',
+								'Vite',
+							]}
+						/>
+					</Experience>
 
-		<Project title="amateurs.com">
-			(React, Next.js, TS, tailwindcss, shadcn/ui, Radix, Ant Design, zod,
-			Turborepo, Vite, tsup, Storybook, Web Components, GraphQL Mesh)
-		</Project>
+					<Experience
+						position="Freelance"
+						company={t('selfEmployed')}
+						location={t('czechRepublic')}
+						start={2022}
+						description={t('freelanceExperience')}
+					/>
+				</ol>
+			</section>
 
-		<Experience
-			position="Full-stack Developer"
-			url="https://blaze.codes/"
-			link="blaze.codes"
-			company="Blaze Company"
-			location={t('czechRepublic')}
-			start={2023}
-			end={2024}
-		>
-			{t('blazeExperience')}
-		</Experience>
+			<section class="mt-20" aria-labelledby="languages">
+				<Heading id="languages">{t('languages')}</Heading>
+				<ul>
+					<Lang name={t('czech')} level={t('native')} score={5} />
+					<Lang name={t('english')} level={t('englishLevel')} score={4} />
+					<Lang name={t('croatian')} level={t('croatianLevel')} score={3} />
+					<Lang name={t('spanish')} level={t('spanishLevel')} score={2} />
+				</ul>
+			</section>
 
-		<Project url="https://www.xalarm.cz/" link="xalarm.cz">
-			(React, React Native, TS, Expo, Next.js, tRPC, Prisma, Stripe, RevenueCat,
-			tailwindcss, shadcn/ui, Radix, zod)
-		</Project>
-		<Project url="https://spudnow.co.uk/" link="spudnow.co.uk">
-			(React Native, TS, Expo, Redux Toolkit, NativeBase, yup)
-		</Project>
-		<Project url="https://izzy.cz/" link="izzy.cz">
-			(React, Vue, TS, Remix, NestJS, MongoDB, TanStack Query, Stripe,
-			tailwindcss, shadcn/ui, Radix, zod, Vite)
-		</Project>
-		<Project title="Winning Tipsters">
-			(React, TS, Remix, NestJS, Prisma, clerk, tailwindcss, shadcn/ui, Radix,
-			zod, Vite)
-		</Project>
+			<section class="mt-20" aria-labelledby="hobbies">
+				<Heading id="hobbies">{t('hobbies')}</Heading>
+				<ul class="grid gap-x-10 sm:grid-cols-2">
+					<li class="border-line border-t py-3">{t('hobby1')}</li>
+					<li class="border-line border-t py-3">{t('hobby2')}</li>
+					<li class="border-line border-t py-3">{t('hobby3')}</li>
+					<li class="border-line border-t py-3">{t('hobby4')}</li>
+				</ul>
+			</section>
 
-		<Experience
-			position="Frontend Developer"
-			url="https://www.royal-fox.cz/"
-			link="royal-fox.cz"
-			company="Royal Fox"
-			location={t('czechRepublic')}
-			start={2023}
-			end={2023}
-		>
-			{t('royalFoxExperience')}
-		</Experience>
+			<section class="mt-20" aria-labelledby="achievements">
+				<Heading id="achievements">{t('achievements')}</Heading>
+				<ul>
+					<Achievement year={2019}>{t('achievement1')}</Achievement>
+					<Achievement year={2021}>{t('achievement2')}</Achievement>
+					<Achievement year={2024}>{t('achievement3')}</Achievement>
+				</ul>
+			</section>
+		</main>
 
-		<Project url="https://www.forclassmates.com/" link="forclassmates.com">
-			(Vue, Nuxt, TS, Tiptap, Pinia, KaTeX, MathLive, Bootstrap, Sass, Element
-			Plus, Vite)
-		</Project>
-
-		<Experience
-			position="Freelance"
-			company={t('selfEmployed')}
-			location={t('czechRepublic')}
-			start={2022}
-		>
-			{t('freelanceExperience')}
-		</Experience>
-
-		<Separator />
-
-		<Heading>✨ {t('languages')}</Heading>
-		<Lang lang={t('czech')} flag="🇨🇿" level={t('native')} />
-		<Lang lang={t('english')} flag="🇺🇸" level={t('comfort')} />
-		<Lang lang={t('croatian')} flag="🇭🇷" level={t('commuticable')} />
-		<Lang lang={t('spanish')} flag="🇪🇸" level={t('basic')} />
-
-		<Separator />
-
-		<Heading>🤠 {t('hobbies')}</Heading>
-		<p>{t('hobby1')}</p>
-		<p>{t('hobby2')}</p>
-		<p>{t('hobby3')}</p>
-		<p>{t('hobby4')}</p>
-
-		<Separator />
-
-		<Heading>🏆 {t('achievemets')}</Heading>
-		<Achievement year={2019}>
-			{t('achievement1')}
-		</Achievement>
-		<Achievement year={2021}>
-			{t('achievement2')}
-		</Achievement>
-		<Achievement year={2024}>
-			{t('achievement3')}
-		</Achievement>
-	</section>
+		<Footer />
+	</div>
 </Layout>
