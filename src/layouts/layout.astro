@@ -53,7 +53,16 @@ const ogImage = new URL('/og.png', site).href
 				</>
 			)
 		}
-		<meta name="theme-color" content="#f4f6f9" />
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: light)"
+			content="#f4f6f9"
+		/>
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: dark)"
+			content="#0d1119"
+		/>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<ClientRouter />
@@ -93,9 +102,14 @@ const ogImage = new URL('/og.png', site).href
 					}
 			})(window, 'https://app.cal.com/embed/embed.js', 'init')
 			Cal('init', { origin: 'https://cal.com' })
+			// `auto` lets the embed read prefers-color-scheme itself, so the modal
+			// follows the OS exactly like the page around it.
 			Cal('ui', {
-				theme: 'light',
-				cssVarsPerTheme: { light: { 'cal-brand': '#1B2CC1' } },
+				theme: 'auto',
+				cssVarsPerTheme: {
+					light: { 'cal-brand': '#1B2CC1' },
+					dark: { 'cal-brand': '#7C8AFF' },
+				},
 				hideEventTypeDetails: true,
 				layout: 'month_view',
 			})
