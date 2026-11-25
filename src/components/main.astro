@@ -7,7 +7,9 @@ import Header from './header.astro'
 import Heading from './heading.astro'
 import Hero from './hero.astro'
 import Lang from './lang.astro'
+import Loop from './loop.astro'
 import Project from './project.astro'
+import Row from './row.astro'
 import { getLangFromUrl, useTranslations } from '../i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
@@ -15,18 +17,48 @@ const t = useTranslations(lang)
 ---
 
 <Layout
-	title={'Marco Velan: ' + t('resume')}
+	title={'Marco Velan · ' + t('resume')}
 	description={t('metaDescription')}
 >
-	<div class="mx-auto w-full max-w-[44rem] px-6 lg:px-0">
+	<div class="mx-auto w-full max-w-[46rem] px-6 lg:px-0">
 		<Header />
 
 		<main>
 			<Hero />
 
-			<section aria-labelledby="experience">
+			<section class="enter" style="--i: 4" aria-labelledby="experience">
 				<Heading id="experience">{t('experience')}</Heading>
-				<ol class="timeline">
+				<ol class="rows">
+					<Experience
+						position="Founder"
+						company="Masina"
+						location={t('czechRepublic')}
+						start={2026}
+						description={t('masinaExperience')}
+					>
+						<Project
+							name="fgg"
+							stack={[
+								'TS',
+								'Bun',
+								'Hono',
+								'tRPC',
+								'Effect',
+								'Drizzle',
+								'PostgreSQL',
+								'TanStack Start',
+								'Docker',
+								'MCP',
+								'Playwright',
+								'Sentry',
+								'PostHog',
+							]}
+						>
+							<p>{t('fggDescription')}</p>
+							<Loop steps={t('fggLoop')} label={t('fggLoopLabel')} />
+						</Project>
+					</Experience>
+
 					<Experience
 						position="Fullstack Lead"
 						company="GoPortal"
@@ -249,29 +281,29 @@ const t = useTranslations(lang)
 				</ol>
 			</section>
 
-			<section class="mt-20" aria-labelledby="languages">
+			<section class="mt-16" aria-labelledby="languages">
 				<Heading id="languages">{t('languages')}</Heading>
-				<ul>
-					<Lang name={t('czech')} level={t('native')} score={5} />
-					<Lang name={t('english')} level={t('englishLevel')} score={4} />
-					<Lang name={t('croatian')} level={t('croatianLevel')} score={3} />
-					<Lang name={t('spanish')} level={t('spanishLevel')} score={2} />
+				<ul class="rows rows-compact">
+					<Lang name={t('czech')} level={t('native')} />
+					<Lang name={t('english')} level={t('englishLevel')} />
+					<Lang name={t('croatian')} level={t('croatianLevel')} />
+					<Lang name={t('spanish')} level={t('spanishLevel')} />
 				</ul>
 			</section>
 
-			<section class="mt-20" aria-labelledby="hobbies">
+			<section class="mt-16" aria-labelledby="hobbies">
 				<Heading id="hobbies">{t('hobbies')}</Heading>
-				<ul class="grid gap-x-10 sm:grid-cols-2">
-					<li class="border-line border-t py-3">{t('hobby1')}</li>
-					<li class="border-line border-t py-3">{t('hobby2')}</li>
-					<li class="border-line border-t py-3">{t('hobby3')}</li>
-					<li class="border-line border-t py-3">{t('hobby4')}</li>
+				<ul class="rows rows-compact">
+					<Row>{t('hobby1')}</Row>
+					<Row>{t('hobby2')}</Row>
+					<Row>{t('hobby3')}</Row>
+					<Row>{t('hobby4')}</Row>
 				</ul>
 			</section>
 
-			<section class="mt-20" aria-labelledby="achievements">
+			<section class="mt-16" aria-labelledby="achievements">
 				<Heading id="achievements">{t('achievements')}</Heading>
-				<ul>
+				<ul class="rows rows-compact">
 					<Achievement year={2019}>{t('achievement1')}</Achievement>
 					<Achievement year={2021}>{t('achievement2')}</Achievement>
 					<Achievement year={2024}>{t('achievement3')}</Achievement>
