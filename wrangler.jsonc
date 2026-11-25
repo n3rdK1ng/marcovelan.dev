@@ -1,0 +1,13 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "marcovelan-dev",
+	"compatibility_date": "2026-11-25",
+	// A static site: no Worker script, just the Astro build output.
+	"assets": {
+		"directory": "./dist",
+		// Serve dist/404.html with a 404 status for unknown paths.
+		"not_found_handling": "404-page",
+		// /cs serves /cs/index.html at /cs/.
+		"html_handling": "auto-trailing-slash"
+	}
+}
