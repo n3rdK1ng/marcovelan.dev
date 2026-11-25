@@ -381,7 +381,8 @@ html[data-loaded] .enter {
 		break-inside: avoid;
 	}
 
-	.row-body h3 {
+	.row-body h3,
+	.project-name {
 		break-after: avoid;
 	}
 

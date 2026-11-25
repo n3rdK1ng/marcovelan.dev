@@ -16,8 +16,9 @@ const toTechId = (tech: string) =>
 ---
 
 <li>
-	{
-		url ? (
+	<p class="project-name">
+		{
+			url ? (
 			<a
 				class="link print-url font-mono text-[0.8125rem]"
 				href={url}
@@ -29,7 +30,8 @@ const toTechId = (tech: string) =>
 		) : (
 			<span class="text-ink font-mono text-[0.8125rem]">{name}</span>
 		)
-	}
+		}
+	</p>
 	{
 		Astro.slots.has('default') && (
 			<div class="mt-1.5 space-y-3 text-[0.9375rem]">

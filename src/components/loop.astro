@@ -8,13 +8,14 @@ interface Props {
 const { steps, label } = Astro.props
 
 const list = steps.split(' → ')
+
+// Geist Mono ships no arrow glyphs, so the arrows are drawn: one shape, one
+// stroke, currentColor. The last step bends back to show the loop repeats.
+// `role="list"` keeps list semantics in WebKit, which drops them once
+// `list-style: none` is applied, and with them the aria-label.
 ---
 
-<!--
-	Geist Mono ships no arrow glyphs, so the arrows are drawn: one shape, one
-	stroke, currentColor. The last step bends back to show the loop repeats.
--->
-<ol class="loop" aria-label={label}>
+<ol class="loop" role="list" aria-label={label}>
 	{
 		list.map((step, index) => (
 			<li class="loop-step">

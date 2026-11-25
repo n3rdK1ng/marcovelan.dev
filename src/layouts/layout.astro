@@ -134,6 +134,8 @@ const ogImage = new URL('/og.png', site).href
 					}
 				}
 				document.addEventListener('pointerover', event => {
+					// A tap fires pointerover too and would leave the highlight stuck.
+					if (event.pointerType !== 'mouse') return
 					const target = event.target
 					const item =
 						target instanceof Element ? target.closest('[data-tech]') : null
@@ -178,8 +180,8 @@ const ogImage = new URL('/og.png', site).href
 		</script>
 		<!--
 			The entrance is a first-load moment. ClientRouter swaps the document on
-			every EN↔CS switch, which would restart the hero stagger and the rail
-			draw on top of the cross-fade — so mark the root as loaded on swap and
+			every EN↔CS switch, which would replay the entrance on top of the
+			cross-fade, so mark the root as loaded on swap and
 			let the CSS opt out from there. Runs before the next paint, so the
 			animations never get a chance to start.
 		-->
