@@ -61,10 +61,10 @@ export const ui = {
 		achievement2:
 			'Allowed by the Czech court to do adult stuff before the age of 18.',
 		achievement3: 'Lifted 300 kg on my own, more than once.',
-		achievement4: 'Was handed the keys to a whole product.',
-		achievement5: 'Stood on the roof of Slovenia.',
-		achievement6: 'Left the nest.',
-		achievement7: 'Started something of my own.',
+		achievement4: 'Lost the right to say “not my code”.',
+		achievement5: 'Climbed the mountain on Slovenia’s flag.',
+		achievement6: 'Left my hometown.',
+		achievement7: 'Hired myself.',
 	},
 	cs: {
 		resume: 'Životopis',
@@ -121,10 +121,10 @@ export const ui = {
 		achievement2:
 			'Český soud mi dovolil dělat dospělácké věci ještě před osmnáctkou.',
 		achievement3: 'Vlastní silou jsem zvedl 300 kg, a ne jednou.',
-		achievement4: 'Dostal jsem klíče od celého produktu.',
-		achievement5: 'Stál jsem na střeše Slovinska.',
-		achievement6: 'Vylétl jsem z hnízda.',
-		achievement7: 'Rozjel jsem něco vlastního.',
+		achievement4: 'Přišel jsem o právo říct „to není můj kód“.',
+		achievement5: 'Vylezl jsem na horu ze slovinské vlajky.',
+		achievement6: 'Opustil jsem rodné město.',
+		achievement7: 'Zaměstnal jsem sám sebe.',
 	},
 } as const
 
