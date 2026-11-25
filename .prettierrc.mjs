@@ -18,4 +18,6 @@ export default {
 		},
 	],
 	plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+	// Tailwind v4 has no JS config: point the class sorter at the theme.
+	tailwindStylesheet: './src/styles/global.css',
 }

@@ -7,13 +7,8 @@ const lang = getLangFromUrl(Astro.url)
 const translatePath = useTranslatedPath(lang)
 ---
 
-<header
-	class="flex items-center justify-between gap-4 py-6 [view-transition-name:site-header]"
->
-	<a
-		href={translatePath('/')}
-		class="text-ink font-mono text-[0.8125rem]"
-	>
+<header class="flex items-center justify-between gap-4 py-6 [view-transition-name:site-header]">
+	<a href={translatePath('/')} class="text-ink font-mono text-[0.8125rem]">
 		marcovelan.dev
 	</a>
 	<div class="no-print flex items-center gap-5">

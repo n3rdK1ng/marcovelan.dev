@@ -1,7 +1,7 @@
 interface ImportMetaEnv {
-	readonly PUBLIC_POSTHOG_KEY: string;
+	readonly PUBLIC_POSTHOG_KEY: string
 }
 
 interface ImportMeta {
-	readonly env: ImportMetaEnv;
+	readonly env: ImportMetaEnv
 }

@@ -17,25 +17,23 @@ const entries = Object.entries(languages)
 	class="flex items-center gap-2 font-mono text-[0.8125rem]"
 	aria-label={t('languages')}
 >
-	{
-		entries.map(([code, label], index) => (
-			<Fragment>
-				{index > 0 && (
-					<span class="text-line" aria-hidden="true">
-						/
-					</span>
-				)}
-				<a
-					href={translatePath('/', code)}
-					hreflang={code}
-					aria-current={code === current ? 'page' : undefined}
-					class:list={[
-						code === current ? 'text-ink' : 'text-ink-muted hover:text-ink',
-					]}
-				>
-					{label}
-				</a>
-			</Fragment>
-		))
-	}
+	{entries.map(([code, label], index) => (
+		<Fragment>
+			{index > 0 && (
+				<span class="text-line" aria-hidden="true">
+					/
+				</span>
+			)}
+			<a
+				href={translatePath('/', code)}
+				hreflang={code}
+				aria-current={code === current ? 'page' : undefined}
+				class:list={[
+					code === current ? 'text-ink' : 'text-ink-muted hover:text-ink',
+				]}
+			>
+				{label}
+			</a>
+		</Fragment>
+	))}
 </nav>
