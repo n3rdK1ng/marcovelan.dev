@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # superpowers design docs and plans (internal)
 docs/superpowers/
+
+# wrangler
+.wrangler/
