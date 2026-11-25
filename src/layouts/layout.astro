@@ -56,12 +56,12 @@ const ogImage = new URL('/og.png', site).href
 		<meta
 			name="theme-color"
 			media="(prefers-color-scheme: light)"
-			content="#f4f6f9"
+			content="#ffffff"
 		/>
 		<meta
 			name="theme-color"
 			media="(prefers-color-scheme: dark)"
-			content="#0d1119"
+			content="#0a0a0a"
 		/>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -107,8 +107,8 @@ const ogImage = new URL('/og.png', site).href
 			Cal('ui', {
 				theme: 'auto',
 				cssVarsPerTheme: {
-					light: { 'cal-brand': '#1B2CC1' },
-					dark: { 'cal-brand': '#7C8AFF' },
+					light: { 'cal-brand': '#171717' },
+					dark: { 'cal-brand': '#EDEDED' },
 				},
 				hideEventTypeDetails: true,
 				layout: 'month_view',
@@ -117,11 +117,10 @@ const ogImage = new URL('/og.png', site).href
 		<!-- Cal element-click embed code ends -->
 	</head>
 	<body>
-		<div class="grid-field" aria-hidden="true"></div>
 		<slot />
 		<!--
-			Signature interaction: hovering any stack chip highlights every chip
-			with the same `data-tech` across the page. Delegated from `document`,
+			Signature interaction: hovering any technology highlights every other
+			place with the same `data-tech` across the page. Delegated from `document`,
 			so it survives ClientRouter view transitions without re-init, and the
 			page is fully readable without it.
 		-->
@@ -136,11 +135,11 @@ const ogImage = new URL('/og.png', site).href
 				}
 				document.addEventListener('pointerover', event => {
 					const target = event.target
-					const chip =
+					const item =
 						target instanceof Element ? target.closest('[data-tech]') : null
 					clear()
-					if (!chip) return
-					const tech = chip.getAttribute('data-tech')
+					if (!item) return
+					const tech = item.getAttribute('data-tech')
 					for (const el of document.querySelectorAll(
 						'[data-tech="' + tech + '"]',
 					)) {

@@ -30,10 +30,7 @@ const entries = Object.entries(languages)
 					hreflang={code}
 					aria-current={code === current ? 'page' : undefined}
 					class:list={[
-						'tracking-[0.08em] transition-colors',
-						code === current
-							? 'text-accent underline decoration-1 underline-offset-4'
-							: 'text-ink-muted hover:text-ink',
+						code === current ? 'text-ink' : 'text-ink-muted hover:text-ink',
 					]}
 				>
 					{label}

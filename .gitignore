@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # claude code workspaces
 .claude/
+
+# superpowers design docs and plans (internal)
+docs/superpowers/

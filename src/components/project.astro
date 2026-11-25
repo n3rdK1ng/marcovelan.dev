@@ -19,7 +19,7 @@ const toTechId = (tech: string) =>
 	{
 		url ? (
 			<a
-				class="link print-url font-mono text-[0.8125rem] font-medium"
+				class="link print-url font-mono text-[0.8125rem]"
 				href={url}
 				target="_blank"
 				rel="noopener noreferrer"
@@ -27,18 +27,31 @@ const toTechId = (tech: string) =>
 				{name}
 			</a>
 		) : (
-			<span class="text-ink font-mono text-[0.8125rem] font-medium">
-				{name}
-			</span>
+			<span class="text-ink font-mono text-[0.8125rem]">{name}</span>
 		)
 	}
-	<ul class="chips mt-2">
+	{
+		Astro.slots.has('default') && (
+			<div class="mt-1.5 space-y-3 text-[0.9375rem]">
+				<slot />
+			</div>
+		)
+	}
+	<p class="stack mt-1.5">
 		{
-			stack.map(tech => (
-				<li class="chip" data-tech={toTechId(tech)}>
-					{tech}
-				</li>
+			stack.map((tech, index) => (
+				<Fragment>
+					<span class="stack-item">
+						<span data-tech={toTechId(tech)}>{tech}</span>
+						{index < stack.length - 1 && (
+							<span class="stack-sep" aria-hidden="true">
+								{' ·'}
+							</span>
+						)}
+					</span>
+					{index < stack.length - 1 && ' '}
+				</Fragment>
 			))
 		}
-	</ul>
+	</p>
 </li>

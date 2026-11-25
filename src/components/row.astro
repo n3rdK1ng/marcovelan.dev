@@ -1,0 +1,15 @@
+---
+interface Props {
+	/** Mono label in the left column: a date range, a year, a name. */
+	label?: string
+}
+
+const { label } = Astro.props
+---
+
+<li class="row">
+	{label && <span class="row-label meta">{label}</span>}
+	<div class="row-body">
+		<slot />
+	</div>
+</li>

@@ -1,82 +1,48 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/bricolage-grotesque';
-@import '@fontsource-variable/instrument-sans';
-@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
 
+/*
+ * Monochrome by default. Ink and paper carry the page; grey carries anything
+ * that should recede; one hairline separates rows. Blue exists only to show
+ * keyboard focus. Every utility on the site resolves to one of these tokens,
+ * so dark mode and print just re-point them.
+ */
 @theme {
-	--color-paper: #f4f6f9;
-	--color-ink: #14171c;
-	--color-ink-muted: #5a6472;
-	--color-accent: #1b2cc1;
-	--color-accent-deep: #131f8a;
-	--color-chip: #e9edf5;
-	--color-line: #d7deea;
+	--color-paper: #ffffff;
+	--color-ink: #171717;
+	--color-ink-muted: #666666;
+	--color-line: #ebebeb;
+	--color-subtle: #f2f2f2;
+	--color-focus: #006bff;
 
-	--font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui,
-		sans-serif;
-	--font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif;
-	--font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo,
-		monospace;
+	--font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Dark ----------------------------------------------------------------------
- * Same blueprint, inverted: blue-black paper, the same ultramarine family
- * brightened until it survives on it, the same restraint. It follows the OS —
- * there is no toggle. Every utility on the site resolves to a --color-* token,
- * so re-pointing the tokens is almost the whole switch.
- *
- * `@theme` emits its tokens into the `theme` cascade layer and the components
- * below live in the `components` layer; this block is unlayered, so it beats
- * both wherever it sits in the file. The print block at the end wins over it in
- * turn, on `!important` and on source order.
+/*
+ * Unlayered, so it beats the `theme` layer the tokens above live in. The print
+ * block at the end wins over it in turn.
  */
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-paper: #0d1119;
-		--color-ink: #e6e9f0;
-		--color-ink-muted: #98a1b3;
-		--color-accent: #7c8aff;
-		/* The hover direction inverts with the scheme: brighter, not deeper. */
-		--color-accent-deep: #9aa6ff;
-		--color-chip: #161b27;
-		--color-line: #252c3c;
-	}
-
-	.grid-field {
-		background-image: linear-gradient(
-				to right,
-				rgba(124, 138, 255, 0.05) 1px,
-				transparent 1px
-			),
-			linear-gradient(to bottom, rgba(124, 138, 255, 0.05) 1px, transparent 1px);
-	}
-
-	::selection {
-		color: var(--color-paper);
-	}
-
-	/*
-	 * White on the brighter accent measures 3:1 and fails AA. Paper on it
-	 * measures 6.3:1, and 8.4:1 on the hover fill.
-	 */
-	.action-primary,
-	.action-primary:hover {
-		color: var(--color-paper);
-	}
-
-	/* The linked chip lifts off the surface here instead of blowing out to white. */
-	.chip.is-linked {
-		background-color: #1c2233;
+		--color-paper: #0a0a0a;
+		--color-ink: #ededed;
+		--color-ink-muted: #a1a1a1;
+		--color-line: #262626;
+		--color-subtle: #1a1a1a;
+		--color-focus: #47a8ff;
 	}
 
 	/*
 	 * Chromium gives a cross-origin iframe an opaque canvas whenever its colour
 	 * scheme differs from the embedder's, and Cal's embed document declares
-	 * none — so a dark page puts the booker on a full-bleed white slab. The
-	 * embed is transparent by design and paints its own dark surfaces, so hand
-	 * the root the embed's scheme for as long as the modal is on screen. The
-	 * box is hidden with inline visibility when it closes; if that ever stops
-	 * being true, the worst case is a light scrollbar until the next load.
+	 * none, so a dark page puts the booker on a full-bleed white slab. The embed
+	 * is transparent by design and paints its own dark surfaces, so hand the
+	 * root the embed's scheme while the modal is on screen. The box is hidden
+	 * with inline visibility when it closes.
 	 */
 	html:has(cal-modal-box:not([style*='hidden'])) {
 		color-scheme: light;
@@ -85,301 +51,247 @@
 
 @layer base {
 	html {
-		/* Both schemes are designed for — let the UA dress scrollbars and form
-		 * controls to match whichever one the OS asks for. */
 		color-scheme: light dark;
 		background-color: var(--color-paper);
 		-webkit-text-size-adjust: 100%;
 	}
 
 	body {
-		position: relative;
-		isolation: isolate;
 		min-height: 100svh;
 		background-color: var(--color-paper);
 		color: var(--color-ink);
 		font-family: var(--font-sans);
 		font-size: 1rem;
-		line-height: 1.65;
+		line-height: 1.6;
 		font-synthesis-weight: none;
 		-webkit-font-smoothing: antialiased;
 		text-rendering: optimizeLegibility;
 	}
 
 	::selection {
-		background-color: var(--color-accent);
-		color: #fff;
+		background-color: var(--color-ink);
+		color: var(--color-paper);
 	}
 
+	/* Two-layer ring: a gap in the surface colour, then the one blue. */
+	/* The transparent outline is what forced-colors mode paints instead. */
 	:focus-visible {
-		outline: 2px solid var(--color-accent);
-		outline-offset: 3px;
+		outline: 2px solid transparent;
+		outline-offset: 2px;
+		border-radius: 2px;
+		box-shadow:
+			0 0 0 2px var(--color-paper),
+			0 0 0 4px var(--color-focus);
 	}
 }
 
 @layer components {
-	/*
-	 * Graph-paper texture. Lives behind the hero only and fades out before the
-	 * long reading sections. Sits at z-index -1 inside the body stacking
-	 * context, so it paints above the paper fill and below every glyph.
-	 */
-	.grid-field {
-		position: absolute;
-		inset: 0 0 auto 0;
-		z-index: -1;
-		height: 44rem;
-		pointer-events: none;
-		background-image: linear-gradient(
-				to right,
-				rgba(27, 44, 193, 0.05) 1px,
-				transparent 1px
-			),
-			linear-gradient(to bottom, rgba(27, 44, 193, 0.05) 1px, transparent 1px);
-		background-size: 28px 28px;
-		-webkit-mask-image: linear-gradient(
-			to bottom,
-			#000 0%,
-			#000 40%,
-			transparent 100%
-		);
-		mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);
-	}
-
+	/* Dates, labels, metadata: the quiet mono voice of the page. */
 	.meta {
 		font-family: var(--font-mono);
 		font-size: 0.8125rem;
-		line-height: 1.5;
-		letter-spacing: 0.01em;
+		line-height: 1.6;
 		color: var(--color-ink-muted);
 		font-variant-numeric: tabular-nums;
 	}
 
 	.link {
-		color: var(--color-accent);
+		color: var(--color-ink);
 		text-decoration: underline;
 		text-decoration-thickness: 1px;
 		text-underline-offset: 3px;
-		text-decoration-color: color-mix(
-			in srgb,
-			var(--color-accent) 35%,
-			transparent
-		);
-		transition:
-			color 140ms ease,
-			text-decoration-color 140ms ease;
-	}
-
-	.link:hover {
-		color: var(--color-accent-deep);
-		text-decoration-color: currentColor;
+		text-decoration-color: color-mix(in srgb, var(--color-ink) 40%, transparent);
 	}
 
 	.action {
 		display: inline-flex;
 		align-items: center;
-		border: 1px solid var(--color-ink);
+		height: 2.25rem;
+		padding: 0 0.75rem;
+		border: 1px solid var(--color-line);
+		border-radius: 6px;
 		background-color: transparent;
-		padding: 0.6875rem 1.125rem;
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
+		font-size: 0.875rem;
 		font-weight: 500;
 		line-height: 1;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
 		color: var(--color-ink);
 		cursor: pointer;
-		transition:
-			background-color 140ms ease,
-			border-color 140ms ease,
-			color 140ms ease;
+		transition: transform 160ms var(--ease-out);
 	}
 
-	.action:hover {
-		background-color: var(--color-ink);
+	/* Pressing should answer immediately. */
+	.action:active {
+		transform: scale(0.97);
+	}
+
+	/* The one filled control on the page. */
+	.action-primary {
 		border-color: var(--color-ink);
+		background-color: var(--color-ink);
 		color: var(--color-paper);
 	}
 
-	/*
-	 * The one filled control on the page. White on --color-accent measures
-	 * 9.6:1, so the mono label clears AA and AAA at this size.
+	/* Ledger rows ---------------------------------------------------------
+	 * Every section is a list of these: a mono label on the left, content on
+	 * the right, a hairline between rows. On phones the label stacks on top.
 	 */
-	.action-primary {
-		background-color: var(--color-accent);
-		border-color: var(--color-accent);
-		color: #fff;
+	.rows {
+		border-bottom: 1px solid var(--color-line);
 	}
 
-	.action-primary:hover {
-		background-color: var(--color-accent-deep);
-		border-color: var(--color-accent-deep);
-		color: #fff;
+	.row {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 0.25rem;
+		padding-block: 1.25rem;
+		border-top: 1px solid var(--color-line);
 	}
 
-	/* An accent ring would read as a halo on the accent fill — use ink. */
-	.action-primary:focus-visible {
-		outline: 2px solid var(--color-ink);
-		outline-offset: 3px;
+	/* One-line lists (languages, hobbies, achievements) sit tighter. */
+	.rows-compact .row {
+		padding-block: 0.75rem;
 	}
 
-	/* Timeline rail --------------------------------------------------------- */
+	@media (min-width: 640px) {
+		.row {
+			grid-template-columns: 8rem minmax(0, 1fr);
+			column-gap: 1.5rem;
+			align-items: baseline;
+		}
 
-	.timeline {
-		position: relative;
-		padding-left: 1.75rem;
+		/* A row with no label keeps its content in the right-hand column. */
+		.row-body:only-child {
+			grid-column: 2;
+		}
 	}
 
-	.timeline::before {
-		content: '';
-		position: absolute;
-		top: 0.5rem;
-		bottom: 0.75rem;
-		left: calc(0.25rem - 0.5px);
-		width: 1px;
-		background-image: linear-gradient(
-			to bottom,
-			color-mix(in srgb, var(--color-accent) 45%, transparent),
-			color-mix(in srgb, var(--color-accent) 12%, transparent)
-		);
+	.row-label {
+		white-space: nowrap;
 	}
 
-	.entry {
-		position: relative;
+	/* One muted mono line per project instead of a cloud of chips. */
+	.stack {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		line-height: 1.7;
+		color: var(--color-ink-muted);
 	}
 
-	.node {
-		position: absolute;
-		top: 0.4rem;
-		left: -1.75rem;
-		width: 0.5rem;
-		height: 0.5rem;
-		border-radius: 9999px;
-		background-color: var(--color-accent);
+	/* A separator never starts a line: it stays with the name before it. */
+	.stack-item {
+		white-space: nowrap;
 	}
 
-	.node-current::after {
-		content: '';
-		position: absolute;
-		inset: -0.25rem;
-		border-radius: 9999px;
-		border: 1px solid var(--color-accent);
-		opacity: 0.45;
+	.stack-sep {
+		color: var(--color-ink-muted);
+		opacity: 0.5;
 	}
 
-	/* Stack chips ----------------------------------------------------------- */
+	/*
+	 * Hovering a technology lights up every other place it was used. Colour
+	 * only, and only where a real pointer can hover.
+	 */
+	[data-tech].is-linked {
+		color: var(--color-ink);
+	}
 
-	.chips {
+	@media (hover: hover) and (pointer: fine) {
+		[data-tech] {
+			transition: color 120ms ease;
+		}
+
+		.action {
+			transition:
+				transform 160ms var(--ease-out),
+				background-color 150ms ease;
+		}
+
+		.link {
+			transition: text-decoration-color 150ms ease;
+		}
+
+		.link:hover {
+			text-decoration-color: currentColor;
+		}
+
+		.action:hover {
+			background-color: var(--color-subtle);
+		}
+
+		.action-primary:hover {
+			background-color: color-mix(in srgb, var(--color-ink) 86%, var(--color-paper));
+		}
+	}
+
+	/* The fgg loop: steps in a row, small drawn arrows between them. */
+	.loop {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.3125rem;
-	}
-
-	.chip {
-		border: 1px solid var(--color-line);
-		border-radius: 0.25rem;
-		background-color: var(--color-chip);
-		padding: 0.0625rem 0.4375rem;
+		align-items: center;
+		gap: 0.25rem 0.375rem;
 		font-family: var(--font-mono);
-		font-size: 0.6875rem;
-		line-height: 1.6;
-		letter-spacing: 0.01em;
-		color: var(--color-ink-muted);
-		white-space: nowrap;
-		transition:
-			background-color 120ms ease,
-			border-color 120ms ease,
-			color 120ms ease;
+		font-size: 0.75rem;
+		line-height: 1.7;
+		color: var(--color-ink);
 	}
 
-	.chip.is-linked {
-		border-color: var(--color-accent);
-		background-color: #fff;
-		color: var(--color-accent);
+	.loop-step {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
+	}
+
+	.loop svg {
+		flex: none;
+		color: var(--color-ink-muted);
 	}
 }
 
 /* Motion --------------------------------------------------------------------
- * One orchestrated moment on load: the hero staggers in, the rail draws down.
+ * One moment on first load: the hero and the first section settle in, 50ms
+ * apart. Nothing loops, nothing replays on the EN↔CS switch.
  */
 
-@keyframes rise {
+@keyframes enter {
 	from {
 		opacity: 0;
-		transform: translateY(8px);
-	}
-	to {
-		opacity: 1;
-		transform: none;
+		transform: translateY(6px);
 	}
 }
 
-@keyframes rail-in {
+@keyframes fade {
 	from {
-		transform: scaleY(0);
-	}
-	to {
-		transform: scaleY(1);
-	}
-}
-
-@keyframes node-pulse {
-	0% {
-		opacity: 0.45;
-		transform: scale(1);
-	}
-	70%,
-	100% {
 		opacity: 0;
-		transform: scale(1.9);
 	}
 }
 
 @media (prefers-reduced-motion: no-preference) {
-	.rise {
-		animation: rise 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	.enter {
+		animation: enter 300ms var(--ease-out) both;
+		animation-delay: calc(var(--i, 0) * 50ms);
 	}
+}
 
-	.rise-1 {
-		animation-delay: 0ms;
+/* Reduced motion means gentler, not none: keep the fade, drop the movement. */
+@media (prefers-reduced-motion: reduce) {
+	.enter {
+		animation: fade 200ms ease both;
 	}
+}
 
-	.rise-2 {
-		animation-delay: 40ms;
-	}
-
-	.rise-3 {
-		animation-delay: 80ms;
-	}
-
-	.rise-4 {
-		animation-delay: 120ms;
-	}
-
-	.timeline::before {
-		transform-origin: top;
-		animation: rail-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
-	}
-
-	.node-current::after {
-		animation: node-pulse 2600ms cubic-bezier(0.22, 1, 0.36, 1) infinite;
-	}
-
-	/*
-	 * First load only. ClientRouter swaps the document on every EN↔CS switch,
-	 * which would replay the whole entrance on top of the cross-fade — an inline
-	 * script in the layout flags the root on `astro:after-swap`. The ambient node
-	 * pulse is not part of the entrance and keeps running.
-	 */
-	html[data-loaded] .rise,
-	html[data-loaded] .timeline::before {
-		animation: none;
-	}
+/*
+ * ClientRouter swaps the document on every EN↔CS switch; an inline script in
+ * the layout flags the root on `astro:after-swap` so the entrance stays a
+ * first-load moment.
+ */
+html[data-loaded] .enter {
+	animation: none;
 }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-	animation-duration: 300ms;
-	animation-timing-function: ease-out;
+	animation-duration: 200ms;
+	animation-timing-function: ease;
 }
 
 /*
@@ -402,25 +314,16 @@
 		margin: 16mm;
 	}
 
-	/*
-	 * Paper is paper, whatever the OS scheme is: point the tokens back at black
-	 * on white before a single utility resolves them, so a dark-mode reader
-	 * never prints a dark-mode résumé.
-	 */
+	/* Paper is paper, whatever the OS scheme is. */
 	:root {
 		--color-paper: #fff;
 		--color-ink: #000;
-		--color-ink-muted: #000;
-		--color-accent: #000;
-		--color-accent-deep: #000;
-		--color-chip: #fff;
-		--color-line: #999;
+		--color-ink-muted: #444;
+		--color-line: #ccc;
+		--color-subtle: #fff;
 	}
 
-	/*
-	 * Printing right after load would otherwise capture the entrance mid-flight
-	 * — a half-faded hero and a rail drawn part of the way down.
-	 */
+	/* Printing right after load would otherwise catch the entrance mid-way. */
 	*,
 	*::before,
 	*::after {
@@ -428,7 +331,6 @@
 		transition: none !important;
 	}
 
-	.grid-field,
 	.no-print {
 		display: none !important;
 	}
@@ -445,77 +347,44 @@
 		text-decoration: none !important;
 	}
 
-	.meta,
-	.text-ink-muted,
-	.text-line {
-		color: #000 !important;
-	}
-
-	/*
-	 * Readers print with background graphics off by default, which drops every
-	 * background fill — the rail and its nodes would vanish. Borders always
-	 * print, so redraw both out of borders: the node keeps its 0.5rem footprint
-	 * (zero-size box + 0.25rem ring, rounded into a solid dot).
-	 */
-	.timeline::before {
-		width: 0 !important;
-		background: none !important;
-		border-left: 1px solid #000;
-	}
-
-	.node {
-		width: 0 !important;
-		height: 0 !important;
-		background: none !important;
-		border: 0.25rem solid #000;
-	}
-
-	.node-current::after {
-		display: none;
-	}
-
-	.chip {
-		background: #fff !important;
-		border-color: #999 !important;
-		color: #000 !important;
-	}
-
-	/*
-	 * Covers .action-primary too: browsers drop background fills when printing,
-	 * so its white label would otherwise print invisible.
-	 */
+	/* Readers print with background graphics off, which drops the ink fill. */
 	.action {
+		height: auto;
 		border: 0 !important;
 		padding: 0 !important;
 		background: transparent !important;
 		color: #000 !important;
-		letter-spacing: 0.04em;
 	}
 
-	/* A leading space would be trimmed here — the ::after is a flex item. */
+	/* A leading space would be trimmed here: the ::after is a flex item. */
 	.action[data-print]::after {
 		content: '\00a0' attr(data-print);
-		text-transform: none;
-		letter-spacing: 0;
+		color: #444;
 	}
 
 	.print-url::after {
 		content: ' (' attr(href) ')';
 		font-family: var(--font-mono);
 		font-size: 0.75em;
+		color: #444;
 	}
 
 	/*
-	 * Only blocks that fit on a page may claim break-inside: avoid. Experience
-	 * is taller than a sheet, and avoiding a break inside it cost a full blank
-	 * page before the timeline started.
+	 * Only blocks that surely fit on a page may avoid breaks. An experience
+	 * row can be taller than the space left on a page, and avoiding a break
+	 * inside it left most of page one blank. Its parts stay whole instead,
+	 * and a role title never sits alone at the foot of a page.
 	 */
-	.entry,
-	.chips {
+	.rows-compact .row,
+	.row-body p,
+	.loop {
 		break-inside: avoid;
 	}
 
-	/* Never break inside a heading, and never leave one at the foot of a page. */
+	.row-body h3 {
+		break-after: avoid;
+	}
+
 	.section-head {
 		break-inside: avoid;
 		break-after: avoid;
