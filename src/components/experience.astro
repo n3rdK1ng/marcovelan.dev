@@ -27,29 +27,25 @@ const hasProjects = Astro.slots.has('default')
 		{position}{' '}
 		<span class="text-ink-muted font-normal">
 			·{' '}
-			{
-				url ? (
-					<a
-						class="link print-url"
-						href={url}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{company}
-					</a>
-				) : (
-					company
-				)
-			}
+			{url ? (
+				<a
+					class="link print-url"
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					{company}
+				</a>
+			) : (
+				company
+			)}
 		</span>
 	</h3>
 	<p class="meta mt-0.5">{location}</p>
 	<p class="mt-3 text-[0.9375rem]">{description}</p>
-	{
-		hasProjects && (
-			<ul class="mt-5 space-y-4">
-				<slot />
-			</ul>
-		)
-	}
+	{hasProjects && (
+		<ul class="mt-5 space-y-4">
+			<slot />
+		</ul>
+	)}
 </Row>

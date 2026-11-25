@@ -12,18 +12,18 @@ const t = useTranslations(lang)
 	>
 		Marco Velan
 	</h1>
-	<p class="enter text-ink-muted mt-2" style="--i: 1">{t('role')}</p>
+	<p class="enter text-ink-muted mt-2" style="--i: 1">
+		{t('role')}
+	</p>
 	<div class="enter mt-8 max-w-[36rem] space-y-3" style="--i: 2">
 		<p>{t('hero1')}</p>
 		<p class="text-ink-muted">{t('hero2')}</p>
 	</div>
 	<div class="enter mt-8 flex flex-wrap gap-2" style="--i: 3">
-		{
-			/*
-			 * A real link, so it still books a call with JS off. The Cal embed
-			 * intercepts the click on `data-cal-link` and opens its modal instead.
-			 */
-		}
+		{/*
+		 * A real link, so it still books a call with JS off. The Cal embed
+		 * intercepts the click on `data-cal-link` and opens its modal instead.
+		 */}
 		<a
 			class="action action-primary"
 			href="https://cal.com/marcovelan/30min"

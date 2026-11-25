@@ -8,4 +8,6 @@ interface Props {
 const { year } = Astro.props
 ---
 
-<Row label={String(year)}><slot /></Row>
+<Row label={String(year)}>
+	<slot />
+</Row>

@@ -16,40 +16,38 @@ const list = steps.split(' → ')
 ---
 
 <ol class="loop" role="list" aria-label={label}>
-	{
-		list.map((step, index) => (
-			<li class="loop-step">
-				{step}
-				{index < list.length - 1 ? (
-					<svg
-						width="10"
-						height="10"
-						viewBox="0 0 12 12"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.25"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						aria-hidden="true"
-					>
-						<path d="M2 6h8M7 3l3 3-3 3" />
-					</svg>
-				) : (
-					<svg
-						width="11"
-						height="11"
-						viewBox="0 0 12 12"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.25"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						aria-hidden="true"
-					>
-						<path d="M6 2a4 4 0 1 1-4 4M0.75 7.25 2 6l1.25 1.25" />
-					</svg>
-				)}
-			</li>
-		))
-	}
+	{list.map((step, index) => (
+		<li class="loop-step">
+			{step}
+			{index < list.length - 1 ? (
+				<svg
+					width="10"
+					height="10"
+					viewBox="0 0 12 12"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.25"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path d="M2 6h8M7 3l3 3-3 3" />
+				</svg>
+			) : (
+				<svg
+					width="11"
+					height="11"
+					viewBox="0 0 12 12"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.25"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path d="M6 2a4 4 0 1 1-4 4M0.75 7.25 2 6l1.25 1.25" />
+				</svg>
+			)}
+		</li>
+	))}
 </ol>

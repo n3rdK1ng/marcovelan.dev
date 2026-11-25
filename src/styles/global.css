@@ -17,7 +17,8 @@
 	--color-focus: #006bff;
 
 	--font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
-	--font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+	--font-mono:
+		'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
 
 	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -100,7 +101,11 @@
 		text-decoration: underline;
 		text-decoration-thickness: 1px;
 		text-underline-offset: 3px;
-		text-decoration-color: color-mix(in srgb, var(--color-ink) 40%, transparent);
+		text-decoration-color: color-mix(
+			in srgb,
+			var(--color-ink) 40%,
+			transparent
+		);
 	}
 
 	.action {
@@ -219,7 +224,11 @@
 		}
 
 		.action-primary:hover {
-			background-color: color-mix(in srgb, var(--color-ink) 86%, var(--color-paper));
+			background-color: color-mix(
+				in srgb,
+				var(--color-ink) 86%,
+				var(--color-paper)
+			);
 		}
 	}
 

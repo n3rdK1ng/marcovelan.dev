@@ -17,8 +17,7 @@ const toTechId = (tech: string) =>
 
 <li>
 	<p class="project-name">
-		{
-			url ? (
+		{url ? (
 			<a
 				class="link print-url font-mono text-[0.8125rem]"
 				href={url}
@@ -29,31 +28,26 @@ const toTechId = (tech: string) =>
 			</a>
 		) : (
 			<span class="text-ink font-mono text-[0.8125rem]">{name}</span>
-		)
-		}
+		)}
 	</p>
-	{
-		Astro.slots.has('default') && (
-			<div class="mt-1.5 space-y-3 text-[0.9375rem]">
-				<slot />
-			</div>
-		)
-	}
+	{Astro.slots.has('default') && (
+		<div class="mt-1.5 space-y-3 text-[0.9375rem]">
+			<slot />
+		</div>
+	)}
 	<p class="stack mt-1.5">
-		{
-			stack.map((tech, index) => (
-				<Fragment>
-					<span class="stack-item">
-						<span data-tech={toTechId(tech)}>{tech}</span>
-						{index < stack.length - 1 && (
-							<span class="stack-sep" aria-hidden="true">
-								{' ·'}
-							</span>
-						)}
-					</span>
-					{index < stack.length - 1 && ' '}
-				</Fragment>
-			))
-		}
+		{stack.map((tech, index) => (
+			<Fragment>
+				<span class="stack-item">
+					<span data-tech={toTechId(tech)}>{tech}</span>
+					{index < stack.length - 1 && (
+						<span class="stack-sep" aria-hidden="true">
+							{' ·'}
+						</span>
+					)}
+				</span>
+				{index < stack.length - 1 && ' '}
+			</Fragment>
+		))}
 	</p>
 </li>
