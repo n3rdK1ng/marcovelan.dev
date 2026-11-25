@@ -52,7 +52,7 @@ export const ui = {
 		croatianLevel: 'Conversational',
 		spanishLevel: 'A bit past the basics',
 		hobbies: 'Hobbies',
-		hobby1: 'Spending time in nature',
+		hobby1: 'Climbing, my current obsession',
 		hobby2: 'Automating the world around me',
 		hobby3: 'Going deep on new tech',
 		hobby4: 'Working on a healthy mindset',
@@ -61,6 +61,10 @@ export const ui = {
 		achievement2:
 			'Allowed by the Czech court to do adult stuff before the age of 18.',
 		achievement3: 'Lifted 300 kg on my own, more than once.',
+		achievement4: 'Was handed the keys to a whole product.',
+		achievement5: 'Stood on the roof of Slovenia.',
+		achievement6: 'Left the nest.',
+		achievement7: 'Started something of my own.',
 	},
 	cs: {
 		resume: 'Životopis',
@@ -108,7 +112,7 @@ export const ui = {
 		croatianLevel: 'Domluvím se',
 		spanishLevel: 'Trochu víc než základy',
 		hobbies: 'Koníčky',
-		hobby1: 'Čas v přírodě',
+		hobby1: 'Lezení, moje současná posedlost',
 		hobby2: 'Automatizace světa kolem mě',
 		hobby3: 'Jít do hloubky u nových technologií',
 		hobby4: 'Práce na zdravém nastavení hlavy',
@@ -117,6 +121,10 @@ export const ui = {
 		achievement2:
 			'Český soud mi dovolil dělat dospělácké věci ještě před osmnáctkou.',
 		achievement3: 'Vlastní silou jsem zvedl 300 kg, a ne jednou.',
+		achievement4: 'Dostal jsem klíče od celého produktu.',
+		achievement5: 'Stál jsem na střeše Slovinska.',
+		achievement6: 'Vylétl jsem z hnízda.',
+		achievement7: 'Rozjel jsem něco vlastního.',
 	},
 } as const
 
