@@ -66,6 +66,7 @@ export const ui = {
 		achievement5: 'Climbed the mountain on Slovenia’s flag.',
 		achievement6: 'Left my hometown.',
 		achievement7: 'Hired myself.',
+		achievement8: 'Adopted two sons. Both have whiskers.',
 	},
 	cs: {
 		resume: 'Životopis',
@@ -127,6 +128,7 @@ export const ui = {
 		achievement5: 'Vylezl jsem na horu ze slovinské vlajky.',
 		achievement6: 'Opustil jsem rodné město.',
 		achievement7: 'Zaměstnal jsem sám sebe.',
+		achievement8: 'Adoptoval jsem dva syny. Oba mají fousky.',
 	},
 } as const
 
