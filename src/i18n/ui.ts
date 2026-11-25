@@ -7,7 +7,6 @@ export const defaultLang = 'en'
 
 export const ui = {
 	en: {
-		resume: 'Resume',
 		viewGithub: 'View source on GitHub',
 		metaDescription:
 			'Marco Velan, fullstack engineer and tech lead from the Czech Republic. I build web and mobile products in TypeScript, from the data model to the interface.',
@@ -69,7 +68,6 @@ export const ui = {
 		achievement8: 'Adopted two sons. Both have whiskers.',
 	},
 	cs: {
-		resume: 'Životopis',
 		viewGithub: 'Zobrazit zdrojový kód na GitHubu',
 		metaDescription:
 			'Marco Velan, fullstack vývojář a tech lead z Česka. Stavím webové a mobilní produkty v TypeScriptu, od datového modelu po rozhraní.',
