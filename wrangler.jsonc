@@ -10,4 +10,6 @@
 		// /cs serves /cs/index.html at /cs/.
 		"html_handling": "auto-trailing-slash",
 	},
+	// Lets Workers Builds publish a preview URL for every non-master branch.
+	"previews": {},
 }
