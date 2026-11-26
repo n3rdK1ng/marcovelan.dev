@@ -42,8 +42,27 @@
 			}),
 			(e.__SV = 1))
 	})(document, window.posthog || [])
-	posthog.init('phc_QEdEnE1TXEU51guF3EYgClltQswBVWAIKldCkywLWjl', {
-		api_host: 'https://eu.i.posthog.com',
-		defaults: '2025-05-24',
-	})
+	// Only production counts: no localhost or preview-URL visits.
+	if (location.hostname === 'marcovelan.dev') {
+		posthog.init('phc_QEdEnE1TXEU51guF3EYgClltQswBVWAIKldCkywLWjl', {
+			// Same-origin proxy (worker/index.js), so ad blockers let it through.
+			api_host: '/a',
+			ui_host: 'https://eu.posthog.com',
+			defaults: '2025-05-24',
+			// Filter lists also block PostHog's paths on any domain (/i/v0/e/,
+			// posthog-recorder.js…), so each path under /a/ goes out
+			// base64url-encoded; the Worker decodes it.
+			rewriteRequestPath: url => {
+				if (url.origin === location.origin && url.pathname.startsWith('/a/')) {
+					url.pathname =
+						'/a/' +
+						btoa(url.pathname.slice(2))
+							.replace(/\+/g, '-')
+							.replace(/\//g, '_')
+							.replace(/=+$/, '')
+				}
+				return url
+			},
+		})
+	}
 </script>
