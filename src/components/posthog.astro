@@ -49,6 +49,20 @@
 			api_host: '/a',
 			ui_host: 'https://eu.posthog.com',
 			defaults: '2025-05-24',
+			// Filter lists also block PostHog's paths on any domain (/i/v0/e/,
+			// posthog-recorder.js…), so each path under /a/ goes out
+			// base64url-encoded; the Worker decodes it.
+			rewriteRequestPath: url => {
+				if (url.origin === location.origin && url.pathname.startsWith('/a/')) {
+					url.pathname =
+						'/a/' +
+						btoa(url.pathname.slice(2))
+							.replace(/\+/g, '-')
+							.replace(/\//g, '_')
+							.replace(/=+$/, '')
+				}
+				return url
+			},
 		})
 	}
 </script>
