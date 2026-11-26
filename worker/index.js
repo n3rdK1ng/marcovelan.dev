@@ -11,9 +11,12 @@ export default {
 		if (!url.pathname.startsWith(`${PREFIX}/`)) return env.ASSETS.fetch(request)
 
 		const path = decodePath(url.pathname.slice(PREFIX.length + 1)) + url.search
-		return path.startsWith('/static/')
+		// Scripts and remote config live on the assets host, as in PostHog's guide.
+		const response = /^\/(static|array)\//.test(path)
 			? staticAsset(request, `https://${ASSET_HOST}${path}`, ctx)
 			: forward(request, `https://${API_HOST}${path}`)
+		// PostHog unreachable: a plain 502 the SDK retries, not Cloudflare's error page.
+		return response.catch(() => new Response(null, { status: 502 }))
 	},
 }
 
@@ -32,7 +35,7 @@ function decodePath(rest) {
 	return `/${rest}`
 }
 
-/** The SDK bundle is versioned and public, so it's cached at the edge. */
+/** Public files, cached at the edge for as long as PostHog's Cache-Control allows. */
 async function staticAsset(request, target, ctx) {
 	if (request.method !== 'GET') return fetch(target, { method: request.method })
 
@@ -45,7 +48,7 @@ async function staticAsset(request, target, ctx) {
 }
 
 /** Passes the visitor's IP on so PostHog's GeoIP still sees the real location. */
-function forward(request, target) {
+async function forward(request, target) {
 	const headers = new Headers(request.headers)
 	headers.delete('cookie')
 	headers.set('X-Forwarded-For', request.headers.get('CF-Connecting-IP') ?? '')

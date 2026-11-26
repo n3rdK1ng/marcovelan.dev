@@ -15,7 +15,7 @@
 	},
 	// The site lives on marcovelan.dev only, so search engines see one host.
 	"workers_dev": false,
-	// Lets Workers Builds publish a preview URL for every non-master branch.
+	// Keeps preview URLs for non-master builds now that workers_dev is off.
 	"preview_urls": true,
 	"previews": {},
 }
