@@ -2,14 +2,20 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "marcovelan-dev",
 	"compatibility_date": "2026-11-25",
-	// A static site: no Worker script, just the Astro build output.
+	// Only proxies PostHog under /a/*; everything else is the Astro build output.
+	"main": "./worker/index.js",
 	"assets": {
 		"directory": "./dist",
+		"binding": "ASSETS",
+		"run_worker_first": ["/a/*"],
 		// Serve dist/404.html with a 404 status for unknown paths.
 		"not_found_handling": "404-page",
 		// /cs serves /cs/index.html at /cs/.
 		"html_handling": "auto-trailing-slash",
 	},
+	// The site lives on marcovelan.dev only, so search engines see one host.
+	"workers_dev": false,
 	// Lets Workers Builds publish a preview URL for every non-master branch.
+	"preview_urls": true,
 	"previews": {},
 }
